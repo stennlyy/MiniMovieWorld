@@ -3,7 +3,7 @@
     this.ViewData["Title"] = "All Movies";
 }
 
-<h1 style="font-size: 75px" class="col-md-6 offset-md-4">@this.ViewData["Title"]</h1>
+<h1 style="font-size: 75px" class="text-center">@this.ViewData["Title"]</h1>
 
 <hr />
 <div class="row">
@@ -13,9 +13,15 @@
             <div class="card" style="width: 12rem;">
                 <img src="~/images/MovieImages/@movie.Image" class="card-img-top">
                 <div class="card-body">
-                    <h5 class="card-title">@movie.Title</h5>
-                    <p class="card-text">@movie.Synopsis</p>
-                    <a asp-controller="Movies" asp-action="GetMovieById" asp-route-id="@movie.Id" class="btn">Details</a>
+                    <h5 class="card-title font-weight-bold">@movie.Title</h5>
+                    <p class="card-text font-weight-bold text-center">@movie.Duration</p>
+                    @foreach (var category in movie.Categories)
+                    {
+                        <p class="card-text font-weight-bold text-center">@category.CategoryName</p>
+                    }
+                <div class="text-center">
+                    <a asp-controller="Movies" asp-action="GetMovieById" asp-route-id="@movie.Id" class="btn text-center">Details</a>
+                </div>
                 </div>
             </div>
         </div>

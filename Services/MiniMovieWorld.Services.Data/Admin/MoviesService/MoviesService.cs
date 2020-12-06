@@ -88,7 +88,12 @@
 
                 if (category == null)
                 {
-                    await this.categoriesRepository.AddAsync(category);
+                    var newCategory = new Category
+                    {
+                        CategoryName = currentCategory.CategoryName,
+                    };
+
+                    await this.categoriesRepository.AddAsync(newCategory);
                 }
 
                 movie.Categories.Add(new CategoryMovie

@@ -45,9 +45,7 @@
 
         public IActionResult AddActor()
         {
-            var actors = this.actorsService.GetAllActors();
-
-            return this.View(actors);
+            return this.View();
         }
 
         [HttpPost]
@@ -107,6 +105,11 @@
         [HttpPost]
         public async Task<IActionResult> AddMovie(MovieInputModel movieInputModel)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View();
+            }
+
             await this.moviesService.AddMovieAsync(movieInputModel);
 
             return this.RedirectToAction("Index");

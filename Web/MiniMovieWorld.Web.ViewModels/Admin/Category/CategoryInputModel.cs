@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace MiniMovieWorld.Web.ViewModels.Admin.Category
+﻿namespace MiniMovieWorld.Web.ViewModels.Admin.Category
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class CategoryInputModel
     {
         [Required]
