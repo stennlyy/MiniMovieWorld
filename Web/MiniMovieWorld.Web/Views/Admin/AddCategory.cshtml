@@ -1,0 +1,17 @@
+﻿@model MiniMovieWorld.Web.ViewModels.Admin.Category.CategoryInputModel
+@{ 
+    this.ViewData["Title"] = "Add Category";
+}
+
+<h1 style="font-size: 75px" class="col-md-6 offset-md-3">@this.ViewData["Title"]</h1>
+
+<form method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="CategoryName">Category Name</label>
+        <input class="form-control" asp-for="CategoryName" />
+    </div>
+    <div class="ol-md-6 offset-md-5">
+        <input type="submit" class="btn btn-outline-dark" />
+    </div>
+</form>

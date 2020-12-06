@@ -1,0 +1,93 @@
+﻿@model MiniMovieWorld.Web.ViewModels.Admin.Movie.MovieInputModel
+@{
+    this.ViewData["Title"] = "Add Movie";
+}
+
+<h1 style="font-size: 75px" class="col-md-6 offset-md-4">@this.ViewData["Title"]</h1>
+
+<form method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Title">Movie Title</label>
+        <input class="form-control" asp-for="Title" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Duration">Movie Duration</label>
+        <input class="form-control" asp-for="Duration" />
+    </div>
+    <div>
+        <label asp-for="Synopsis">Movie Synopsis</label>
+        <textarea asp-for="Synopsis" class="form-control" rows="6"></textarea>
+    </div>
+    <br />
+    <br />
+    <div class="btn-group" role="group">
+        <div class="form-group" id="ActorsContainer">
+            <label class="form-control-sm" asp-for="Actors"></label>
+            <a class="btn btn-outline-dark form-row" onclick="AddMoreActors()">+</a>
+            <br />
+            <br />
+        </div>
+        <div class="form-group" id="DirectorsContainer">
+            <label class="form-control-sm" asp-for="Directors"></label>
+            <a class="btn btn-outline-dark form-row" onclick="AddMoreDirectors()">+</a>
+            <br />
+            <br />
+        </div>
+        <div class="form-group" id="WritersContainer">
+            <label class="form-control-sm" asp-for="Writers"></label>
+            <a class="btn btn-outline-dark form-row" onclick="AddMoreWriters()">+</a>
+            <br />
+            <br />
+        </div>
+        <div class="form-group" id="CategoriesContainer">
+            <label class="form-control-sm" asp-for="Categories"></label>
+            <a class="btn btn-outline-dark form-row" onclick="AddMoreCategories()">+</a>
+            <br />
+            <br />
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Image">Upload Actor Image</label>
+        <input class="form-control" asp-for="Image" />
+    </div>
+    <div class="ol-md-6 offset-md-5">
+        <input type="submit" class="btn btn-outline-dark" />
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        var actorsIndex = 0;
+        function AddMoreActors() {
+            $("#ActorsContainer").
+                append("<div class='form-control-sm'>Actor Name: <input type='text' name='Actors[" + actorsIndex + "].FirstName' /></div>");
+            actorsIndex++;
+        }
+    </script>
+    <script>
+        var directorsIndex = 0;
+        function AddMoreDirectors() {
+            $("#DirectorsContainer").
+                append("<div class='form-control-sm'>Director Name: <input type='text' name='Directors[" + directorsIndex + "].FirstName' /></div>");
+            directorsIndex++;
+        }
+    </script>
+    <script>
+        var writersIndex = 0;
+        function AddMoreWriters() {
+            $("#WritersContainer").
+                append("<div class='form-control-sm'>Writer Name: <input type='text' name='Writers[" + writersIndex + "].FirstName' /></div>");
+            writersIndex++;
+        }
+    </script>
+    <script>
+        var categoriesIndex = 0;
+        function AddMoreCategories() {
+            $("#CategoriesContainer").
+                append("<div class='form-control-sm'>Category: <input type='text' name='Categories[" + categoriesIndex + "].CategoryName' /></div>");
+            categoriesIndex++;
+        }
+    </script>
+}
+

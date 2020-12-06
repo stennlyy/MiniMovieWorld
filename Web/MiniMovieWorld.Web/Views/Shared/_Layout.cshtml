@@ -1,0 +1,74 @@
+﻿@using MiniMovieWorld.Common
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@this.ViewData["Title"]</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/site.min.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/style.css" rel="stylesheet" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                    @if (this.User.IsInRole("Admin"))
+                    {
+                        <div class="dropdown">
+                            <button class="btn btn-outline-dark dropdown-toggle" type="button" data-toggle="dropdown">
+                                Admin Actions
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="Index">Admin Home Page</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="AddActor">Add Actor</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="AddWriter">Add Writer</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="AddDirector">Add Director</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="AddCategory">Add Category</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="AddMovie">Add Movie</a>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <a class="btn btn-outline-secondary" asp-area="" asp-controller="Movies" asp-action="All">All Movies</a>
+                        </div>
+                    }
+                    @if (!this.User.IsInRole("Admin"))
+                    {
+                        <div class=" col-auto">
+                            <a class="btn btn-outline-secondary" asp-area="" asp-controller="Movies" asp-action="All">All Movies</a>
+                        </div>
+                    }
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <partial name="_CookieConsentPartial" />
+        <main role="main" class="pb-3">
+            @this.RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+    <script src="~/js/main.js" asp-append-version="true"></script>
+    <script src="~/js/site.min.js" asp-append-version="true"></script>
+    @await this.RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
