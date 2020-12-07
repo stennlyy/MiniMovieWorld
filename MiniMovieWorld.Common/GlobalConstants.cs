@@ -4,6 +4,6 @@
     {
         public const string SystemName = "MiniMovieWorld";
 
-        public const string AdministratorRoleName = "Administrator";
+        public const string AdminRoleName = "Admin";
     }
 }
