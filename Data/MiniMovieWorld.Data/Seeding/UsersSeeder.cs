@@ -27,12 +27,12 @@
                 return;
             }
 
-            var role = new ApplicationRole
+            var adminRole = new ApplicationRole
             {
                 Name = "Admin",
             };
 
-            await this.roleManager.CreateAsync(role);
+            await this.roleManager.CreateAsync(adminRole);
 
             var applicationUser = new ApplicationUser
             {

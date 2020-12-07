@@ -92,6 +92,8 @@
                 new ApplicationDbContextSeeder(userManager, roleManager).SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
             }
 
+            roleManager.CreateAsync(new ApplicationRole("User"));
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
