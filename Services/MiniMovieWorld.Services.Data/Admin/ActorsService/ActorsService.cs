@@ -51,7 +51,7 @@
             {
                 await this.nationalityRepository.AddAsync(new Nationality
                 {
-                    NationName = actorInputModel.Nationality,
+                    NationName = actorInputModel.Nationality.Trim(),
                 });
             }
 
@@ -67,9 +67,9 @@
                 var newActor = new Actor
                 {
                     Image = image,
-                    FirstName = actorInputModel.FirstName,
-                    MiddleName = actorInputModel.MiddleName,
-                    LastName = actorInputModel.LastName,
+                    FirstName = actorInputModel.FirstName.Trim(),
+                    MiddleName = actorInputModel.MiddleName.Trim(),
+                    LastName = actorInputModel.LastName.Trim(),
                     Age = actorInputModel.Age,
                     Nationality = nationality,
                 };

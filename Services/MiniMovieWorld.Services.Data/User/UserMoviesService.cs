@@ -59,10 +59,12 @@
             return movie;
         }
 
-        public IEnumerable<MovieViewModel> GetAllMovies()
+        public IEnumerable<MovieViewModel> GetAllMovies(int page, int itemsPerPage)
         {
             var movies = this.moviesRepository
             .All()
+            .Skip((page - 1) * itemsPerPage)
+            .Take(itemsPerPage)
             .Select(x => new MovieViewModel
             {
                 Id = x.Id,
@@ -98,6 +100,11 @@
             }).ToList();
 
             return movies;
+        }
+
+        public int GetMoviesCount()
+        {
+            return this.moviesRepository.All().Count();
         }
     }
 }

@@ -27,7 +27,7 @@
             {
                 await this.categoriesRepository.AddAsync(new Category
                 {
-                    CategoryName = categoryInputModel.CategoryName,
+                    CategoryName = categoryInputModel.CategoryName.Trim(),
                 });
 
                 await this.categoriesRepository.SaveChangesAsync();

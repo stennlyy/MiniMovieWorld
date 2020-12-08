@@ -42,9 +42,9 @@
             var movie = new Movie
             {
                 Image = image,
-                Title = movieInputModel.Title,
+                Title = movieInputModel.Title.Trim(),
                 Duration = TimeSpan.FromMinutes(movieInputModel.Duration),
-                Synopsis = movieInputModel.Synopsis,
+                Synopsis = movieInputModel.Synopsis.Trim(),
             };
 
             this.AddActorsToMovie(movieInputModel, movie);
@@ -81,6 +81,11 @@
         {
             foreach (var currentCategory in movieInputModel.Categories)
             {
+                if (string.IsNullOrEmpty(currentCategory.CategoryName))
+                {
+                    continue;
+                }
+
                 var category = this.categoriesRepository
                     .All()
                     .Where(x => x.CategoryName == currentCategory.CategoryName)
@@ -90,7 +95,7 @@
                 {
                     var newCategory = new Category
                     {
-                        CategoryName = currentCategory.CategoryName,
+                        CategoryName = currentCategory.CategoryName.Trim(),
                     };
 
                     await this.categoriesRepository.AddAsync(newCategory);
@@ -108,6 +113,11 @@
         {
             foreach (var currentDirector in movieInputModel.Directors)
             {
+                if (string.IsNullOrEmpty(currentDirector.FirstName))
+                {
+                    continue;
+                }
+
                 var names = currentDirector.FirstName.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToArray();
 
                 var director = this.directorsRepository
@@ -127,6 +137,11 @@
         {
             foreach (var currentWriter in movieInputModel.Writers)
             {
+                if (string.IsNullOrEmpty(currentWriter.FirstName))
+                {
+                    continue;
+                }
+
                 var names = currentWriter.FirstName.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToArray();
 
                 var writer = this.writersRepository
@@ -146,6 +161,11 @@
         {
             foreach (var currentActor in movieInputModel.Actors)
             {
+                if (string.IsNullOrEmpty(currentActor.FirstName))
+                {
+                    continue;
+                }
+
                 var names = currentActor.FirstName.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToArray();
 
                 var actor = this.actorsRepository

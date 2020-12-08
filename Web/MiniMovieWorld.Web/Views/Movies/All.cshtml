@@ -10,21 +10,33 @@
     @foreach (var movie in this.Model.Movies)
     {
         <div class="col-auto">
-            <div class="card" style="width: 12rem;">
+            <div class="card" style="width: 10rem;">
                 <img src="~/images/MovieImages/@movie.Image" class="card-img-top">
                 <div class="card-body">
-                    <h5 class="card-title font-weight-bold">@movie.Title</h5>
-                    <p class="card-text font-weight-bold text-center">@movie.Duration</p>
+                    <h5 class="card-title font-weight-bolder text-center" style="color: #ff5f13">@movie.Title</h5>
+                    <h6 class="card-title font-weight-bold text-center">Duration</h6>
+                    <p class="card-text font-weight-light text-center">@movie.Duration</p>
+                    @if (movie.Categories.Count() == 1)
+                    {
+                        <h6 class="card-title font-weight-bold text-center">Category</h6>
+                    }
+                    @if (movie.Categories.Count() > 1)
+                    {
+                        <h6 class="card-title font-weight-bold text-center">Categories</h6>
+                    }
                     @foreach (var category in movie.Categories)
                     {
-                        <p class="card-text font-weight-bold text-center">@category.CategoryName</p>
+                        <p class="card-text font-weight-light text-center">@category.CategoryName</p>
                     }
-                <div class="text-center">
-                    <a asp-controller="Movies" asp-action="GetMovieById" asp-route-id="@movie.Id" class="btn text-center">Details</a>
-                </div>
+                    <div class="text-center">
+                        <a asp-controller="Movies" asp-action="GetMovieById" asp-route-id="@movie.Id" class="btn text-center">Details</a>
+                    </div>
                 </div>
             </div>
         </div>
     }
 </div>
 <hr />
+
+<partial name="_PagingPartial" model="@this.Model" />
+

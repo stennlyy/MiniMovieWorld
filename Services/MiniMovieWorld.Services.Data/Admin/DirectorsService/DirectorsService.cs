@@ -36,7 +36,7 @@
             {
                 await this.nationalitiesRepository.AddAsync(new Nationality
                 {
-                    NationName = directorInputModel.Nationality,
+                    NationName = directorInputModel.Nationality.Trim(),
                 });
             }
 
@@ -51,9 +51,9 @@
             {
                 var newDrector = new Director
                 {
-                    FirstName = directorInputModel.FirstName,
-                    MiddleName = directorInputModel.MiddleName,
-                    LastName = directorInputModel.LastName,
+                    FirstName = directorInputModel.FirstName.Trim(),
+                    MiddleName = directorInputModel.MiddleName.Trim(),
+                    LastName = directorInputModel.LastName.Trim(),
                     Age = directorInputModel.Age,
                     Nationality = nationality,
                 };

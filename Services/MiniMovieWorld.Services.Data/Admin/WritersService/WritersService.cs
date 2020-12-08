@@ -36,7 +36,7 @@
             {
                 await this.nationalityRepository.AddAsync(new Nationality
                 {
-                    NationName = writerInputModel.Nationality,
+                    NationName = writerInputModel.Nationality.Trim(),
                 });
             }
 
@@ -52,9 +52,9 @@
                 var newWriter = new Writer
                 {
                     Image = image,
-                    FirstName = writerInputModel.FirstName,
-                    MiddleName = writerInputModel.MiddleName,
-                    LastName = writerInputModel.LastName,
+                    FirstName = writerInputModel.FirstName.Trim(),
+                    MiddleName = writerInputModel.MiddleName.Trim(),
+                    LastName = writerInputModel.LastName.Trim(),
                     Age = writerInputModel.Age,
                     Nationality = nationality,
                 };

@@ -20,12 +20,17 @@
             return this.View(movie);
         }
 
-        public IActionResult All()
+        public IActionResult All(int id = 1)
         {
-            var movies = this.userMoviesService.GetAllMovies();
+            const int ItemsPerPage = 6;
+
+            var movies = this.userMoviesService.GetAllMovies(id, ItemsPerPage);
 
             var movieViewModel = new AllMoviesViewModel
             {
+                ItemsPerPage = ItemsPerPage,
+                PageNumber = id,
+                MoviesCount = this.userMoviesService.GetMoviesCount(),
                 Movies = movies,
             };
 
