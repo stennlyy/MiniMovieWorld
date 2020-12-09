@@ -34,9 +34,9 @@
             <br />
             <br />
         </div>
-        <div class="form-group" id="WritersContainer">
-            <label class="form-control-sm" asp-for="Writers"></label>
-            <a class="btn btn-outline-dark form-row" onclick="AddMoreWriters()">+</a>
+        <div class="form-group" id="ProducersContainer">
+            <label class="form-control-sm" asp-for="Producers"></label>
+            <a class="btn btn-outline-dark form-row" onclick="AddMoreProducers()">+</a>
             <br />
             <br />
         </div>
@@ -74,11 +74,11 @@
         }
     </script>
     <script>
-        var writersIndex = 0;
-        function AddMoreWriters() {
-            $("#WritersContainer").
-                append("<div class='form-control-sm'>Writer Name: <input type='text' name='Writers[" + writersIndex + "].FirstName' /></div>");
-            writersIndex++;
+        var producersIndex = 0;
+        function AddMoreProducers() {
+            $("#ProducersContainer").
+                append("<div class='form-control-sm'>Producer Name: <input type='text' name='Producers[" + producersIndex + "].FirstName' /></div>");
+            producersIndex++;
         }
     </script>
     <script>

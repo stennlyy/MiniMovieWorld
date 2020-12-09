@@ -7,7 +7,7 @@
     using MiniMovieWorld.Web.ViewModels.Admin.Actor;
     using MiniMovieWorld.Web.ViewModels.Admin.Category;
     using MiniMovieWorld.Web.ViewModels.Admin.Director;
-    using MiniMovieWorld.Web.ViewModels.Admin.Writer;
+    using MiniMovieWorld.Web.ViewModels.Admin.Producer;
 
     public class MovieInputModel
     {
@@ -25,7 +25,7 @@
 
         public IEnumerable<ActorInputModel> Actors { get; set; }
 
-        public IEnumerable<WriterInputModel> Writers { get; set; }
+        public IEnumerable<ProducerInputModel> Producers { get; set; }
 
         public IEnumerable<DirectorInputModel> Directors { get; set; }
 

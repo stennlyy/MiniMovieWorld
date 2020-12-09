@@ -68,7 +68,7 @@
                 {
                     Image = image,
                     FirstName = actorInputModel.FirstName.Trim(),
-                    MiddleName = actorInputModel.MiddleName.Trim(),
+                    MiddleName = actorInputModel.MiddleName,
                     LastName = actorInputModel.LastName.Trim(),
                     Age = actorInputModel.Age,
                     Nationality = nationality,

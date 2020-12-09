@@ -17,7 +17,7 @@
 
         public IEnumerable<ActorsViewModel> Actors { get; set; }
 
-        public IEnumerable<WritersViewModel> Writers { get; set; }
+        public IEnumerable<ProducersViewModel> Producers { get; set; }
 
         public IEnumerable<DirectorsViewModel> Directors { get; set; }
 

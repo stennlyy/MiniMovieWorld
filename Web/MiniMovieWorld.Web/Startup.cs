@@ -72,7 +72,7 @@
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IActorsService, ActorsService>();
-            services.AddTransient<IWritersService, WritersService>();
+            services.AddTransient<IProducersService, ProducersService>();
             services.AddTransient<IDirectorsService, DirectorsService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
             services.AddTransient<IMoviesService, MoviesService>();

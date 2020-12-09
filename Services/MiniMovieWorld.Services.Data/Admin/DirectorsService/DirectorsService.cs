@@ -52,7 +52,7 @@
                 var newDrector = new Director
                 {
                     FirstName = directorInputModel.FirstName.Trim(),
-                    MiddleName = directorInputModel.MiddleName.Trim(),
+                    MiddleName = directorInputModel.MiddleName,
                     LastName = directorInputModel.LastName.Trim(),
                     Age = directorInputModel.Age,
                     Nationality = nationality,

@@ -14,7 +14,7 @@
     {
         private readonly IDeletableEntityRepository<Movie> moviesRepository;
         private readonly IDeletableEntityRepository<Actor> actorsRepository;
-        private readonly IDeletableEntityRepository<Writer> writersRepository;
+        private readonly IDeletableEntityRepository<Producer> producersRepository;
         private readonly IDeletableEntityRepository<Director> directorsRepository;
         private readonly IDeletableEntityRepository<Category> categoriesRepository;
         private readonly IWebHostEnvironment webHostEnvironment;
@@ -22,14 +22,14 @@
         public MoviesService(
             IDeletableEntityRepository<Movie> moviesRepository,
             IDeletableEntityRepository<Actor> actorsRepository,
-            IDeletableEntityRepository<Writer> writersRepository,
+            IDeletableEntityRepository<Producer> producersRepository,
             IDeletableEntityRepository<Director> directorsRepository,
             IDeletableEntityRepository<Category> categoriesRepository,
             IWebHostEnvironment webHostEnvironment)
         {
             this.moviesRepository = moviesRepository;
             this.actorsRepository = actorsRepository;
-            this.writersRepository = writersRepository;
+            this.producersRepository = producersRepository;
             this.directorsRepository = directorsRepository;
             this.categoriesRepository = categoriesRepository;
             this.webHostEnvironment = webHostEnvironment;
@@ -48,7 +48,7 @@
             };
 
             this.AddActorsToMovie(movieInputModel, movie);
-            this.AddWritersToMovie(movieInputModel, movie);
+            this.AddProducersToMovie(movieInputModel, movie);
             this.AddDirectorsToMovie(movieInputModel, movie);
             await this.AddCategoriesToMovieAsync(movieInputModel, movie);
 
@@ -133,25 +133,25 @@
             }
         }
 
-        private void AddWritersToMovie(MovieInputModel movieInputModel, Movie movie)
+        private void AddProducersToMovie(MovieInputModel movieInputModel, Movie movie)
         {
-            foreach (var currentWriter in movieInputModel.Writers)
+            foreach (var currentProducer in movieInputModel.Producers)
             {
-                if (string.IsNullOrEmpty(currentWriter.FirstName))
+                if (string.IsNullOrEmpty(currentProducer.FirstName))
                 {
                     continue;
                 }
 
-                var names = currentWriter.FirstName.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToArray();
+                var names = currentProducer.FirstName.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToArray();
 
-                var writer = this.writersRepository
+                var producer = this.producersRepository
                     .All()
                     .Where(x => x.FirstName == names[0] && x.LastName == names[1])
                     .FirstOrDefault();
 
-                movie.Writers.Add(new WriterMovie
+                movie.Producers.Add(new ProducerMovie
                 {
-                    Writer = writer,
+                    Producer = producer,
                     Movie = movie,
                 });
             }

@@ -35,12 +35,12 @@
                         MiddleName = y.Actor.MiddleName,
                         LastName = y.Actor.LastName,
                     }).ToList(),
-                    Writers = x.Writers.Select(y => new WritersViewModel
+                    Producers = x.Producers.Select(y => new ProducersViewModel
                     {
-                        Id = y.Writer.Id,
-                        FirstName = y.Writer.FirstName,
-                        MiddleName = y.Writer.MiddleName,
-                        LastName = y.Writer.LastName,
+                        Id = y.Producer.Id,
+                        FirstName = y.Producer.FirstName,
+                        MiddleName = y.Producer.MiddleName,
+                        LastName = y.Producer.LastName,
                     }).ToList(),
                     Directors = x.Directors.Select(y => new DirectorsViewModel
                     {
@@ -79,12 +79,12 @@
                     MiddleName = y.Actor.MiddleName,
                     LastName = y.Actor.LastName,
                 }).ToList(),
-                Writers = x.Writers.Select(y => new WritersViewModel
+                Producers = x.Producers.Select(y => new ProducersViewModel
                 {
-                    Id = y.WriterId,
-                    FirstName = y.Writer.FirstName,
-                    MiddleName = y.Writer.MiddleName,
-                    LastName = y.Writer.LastName,
+                    Id = y.ProducerId,
+                    FirstName = y.Producer.FirstName,
+                    MiddleName = y.Producer.MiddleName,
+                    LastName = y.Producer.LastName,
                 }).ToList(),
                 Directors = x.Directors.Select(y => new DirectorsViewModel
                 {

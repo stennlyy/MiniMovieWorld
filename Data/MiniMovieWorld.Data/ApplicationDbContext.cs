@@ -28,7 +28,7 @@
 
         public DbSet<Actor> Actors { get; set; }
 
-        public DbSet<Writer> Writers { get; set; }
+        public DbSet<Producer> Producers { get; set; }
 
         public DbSet<Director> Directors { get; set; }
 
@@ -40,7 +40,7 @@
 
         public DbSet<ActorMovie> ActorMovies { get; set; }
 
-        public DbSet<WriterMovie> WriterMovies { get; set; }
+        public DbSet<ProducerMovie> ProducerMovies { get; set; }
 
         public DbSet<DirectorMovie> DirectorMovies { get; set; }
 

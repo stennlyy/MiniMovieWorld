@@ -15,27 +15,27 @@
     using MiniMovieWorld.Web.ViewModels.Admin.Category;
     using MiniMovieWorld.Web.ViewModels.Admin.Director;
     using MiniMovieWorld.Web.ViewModels.Admin.Movie;
-    using MiniMovieWorld.Web.ViewModels.Admin.Writer;
+    using MiniMovieWorld.Web.ViewModels.Admin.Producer;
 
     [Authorize(Roles = GlobalConstants.AdminRoleName)]
     [Area("Administration")]
     public class AdministrationController : BaseController
     {
         private readonly IActorsService actorsService;
-        private readonly IWritersService writersService;
+        private readonly IProducersService producersService;
         private readonly IDirectorsService directorsService;
         private readonly ICategoriesService categoriesService;
         private readonly IMoviesService moviesService;
 
         public AdministrationController(
             IActorsService actorsService,
-            IWritersService writersService,
+            IProducersService producersService,
             IDirectorsService directorsService,
             ICategoriesService categoriesService,
             IMoviesService moviesService)
         {
             this.actorsService = actorsService;
-            this.writersService = writersService;
+            this.producersService = producersService;
             this.directorsService = directorsService;
             this.categoriesService = categoriesService;
             this.moviesService = moviesService;
@@ -64,20 +64,20 @@
             return this.RedirectToAction("Index");
         }
 
-        public IActionResult AddWriter()
+        public IActionResult AddProducer()
         {
             return this.View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddWriter(WriterInputModel writerInputModel)
+        public async Task<IActionResult> AddProducer(ProducerInputModel producerInputModel)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.View();
             }
 
-            await this.writersService.AddWriterAsync(writerInputModel);
+            await this.producersService.AddProducerAsync(producerInputModel);
 
             return this.RedirectToAction("Index");
         }
