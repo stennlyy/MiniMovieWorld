@@ -34,7 +34,8 @@
                         Id = y.Movie.Id,
                         Title = y.Movie.Title,
                     }).ToList(),
-                }).FirstOrDefault();
+                })
+                .FirstOrDefault();
 
             return actor;
         }

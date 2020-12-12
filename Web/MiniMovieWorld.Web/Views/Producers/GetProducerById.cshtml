@@ -1,4 +1,4 @@
-﻿@model MiniMovieWorld.Web.ViewModels.Actors.SingleActorViewModel
+﻿@model MiniMovieWorld.Web.ViewModels.Producers.SingleProducerViewModel
 
 @{
     this.ViewData["Title"] = $"{this.Model.FirstName + " " + this.Model.LastName}";
@@ -8,7 +8,7 @@
 
 <div class="container">
     <div class="form-group text-center">
-        <img src="~/images/actorImages/@this.Model.Image" class="img rounded" style="width: 20rem;" />
+        <img src="~/images/producerImages/@this.Model.Image" class="img rounded" style="width: 20rem;" />
         <br />
     </div>
     <div class="form-group">
@@ -35,10 +35,10 @@
         @this.Model.Age
     </div>
     <div class="form-group">
-        <label asp-for="ActorMovies" class="form-control-plaintext font-weight-bold text-center" style="font-size:25px">Starring In:</label>
-        @foreach (var actorMovie in this.Model.ActorMovies)
+        <label asp-for="ProducerMovies" class="form-control-plaintext font-weight-bold text-center" style="font-size:25px">Producer of:</label>
+        @foreach (var producerMovie in this.Model.ProducerMovies)
         {
-            <a asp-controller="Movies" asp-action="GetMovieById" asp-route-id="@actorMovie.Id" class="form-control-plaintext text-center" style="color: #ff5f13">@actorMovie.Title</a>
+            <a asp-controller="Movies" asp-action="GetMovieById" asp-route-id="@producerMovie.Id" class="form-control-plaintext text-center" style="color: #ff5f13">@producerMovie.Title</a>
         }
     </div>
 </div>
