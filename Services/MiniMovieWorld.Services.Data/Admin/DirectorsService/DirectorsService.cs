@@ -4,6 +4,7 @@
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Hosting;
     using MiniMovieWorld.Data.Common.Repositories;
     using MiniMovieWorld.Data.Models;
@@ -51,9 +52,11 @@
             {
                 var newDrector = new Director
                 {
+                    Image = image,
                     FirstName = directorInputModel.FirstName.Trim(),
                     MiddleName = directorInputModel.MiddleName,
                     LastName = directorInputModel.LastName.Trim(),
+                    DirectorBio = directorInputModel.DirectorBio,
                     Age = directorInputModel.Age,
                     Nationality = nationality,
                 };

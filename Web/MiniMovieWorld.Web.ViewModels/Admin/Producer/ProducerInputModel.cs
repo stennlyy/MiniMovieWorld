@@ -2,5 +2,6 @@
 {
     public class ProducerInputModel : BaseInputModel
     {
+        public string ProducerBio { get; set; }
     }
 }

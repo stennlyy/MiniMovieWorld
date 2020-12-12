@@ -1,10 +1,6 @@
 ﻿namespace MiniMovieWorld.Web.ViewModels.Actors
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     using MiniMovieWorld.Web.ViewModels.Movies;
 
@@ -19,6 +15,8 @@
         public string MiddleName { get; set; }
 
         public string LastName { get; set; }
+
+        public string ActorBio { get; set; }
 
         public int? Age { get; set; }
 

@@ -29,6 +29,7 @@
                     MiddleName = x.MiddleName,
                     LastName = x.LastName,
                     Age = x.Age,
+                    DirectorBio = x.DirectorBio,
                     DirectorMovies = x.DirectorMovies.Select(y => new MovieViewModel
                     {
                         Id = y.Movie.Id,

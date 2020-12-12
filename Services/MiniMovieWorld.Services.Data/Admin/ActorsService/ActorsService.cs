@@ -70,6 +70,7 @@
                     FirstName = actorInputModel.FirstName.Trim(),
                     MiddleName = actorInputModel.MiddleName,
                     LastName = actorInputModel.LastName.Trim(),
+                    ActorBio = actorInputModel.ActorBio,
                     Age = actorInputModel.Age,
                     Nationality = nationality,
                 };

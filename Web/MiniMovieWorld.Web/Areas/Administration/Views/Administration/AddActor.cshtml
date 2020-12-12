@@ -1,4 +1,5 @@
 ﻿@model MiniMovieWorld.Web.ViewModels.Admin.Actor.ActorInputModel
+
 @{ 
     this.ViewData["Title"] = "Add Actor";
 }
@@ -18,6 +19,10 @@
     <div class="form-group">
         <label asp-for="LastName">Last Name</label>
         <input class="form-control" asp-for="LastName" />
+    </div>
+    <div>
+        <label asp-for="ActorBio">Short Biography</label>
+        <textarea asp-for="ActorBio" class="form-control" rows="6"></textarea>
     </div>
     <div class="form-group">
         <label asp-for="Age">Age</label>

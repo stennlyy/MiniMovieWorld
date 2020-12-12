@@ -28,6 +28,7 @@
                     FirstName = x.FirstName,
                     MiddleName = x.MiddleName,
                     LastName = x.LastName,
+                    ActorBio = x.ActorBio,
                     Age = x.Age,
                     ActorMovies = x.ActorMovies.Select(y => new MovieViewModel
                     {

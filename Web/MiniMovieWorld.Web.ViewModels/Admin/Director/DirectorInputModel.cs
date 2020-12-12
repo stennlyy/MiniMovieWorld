@@ -2,5 +2,6 @@
 {
     public class DirectorInputModel : BaseInputModel
     {
+        public string DirectorBio { get; set; }
     }
 }

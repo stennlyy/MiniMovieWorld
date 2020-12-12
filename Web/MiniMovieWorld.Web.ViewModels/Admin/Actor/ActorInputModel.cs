@@ -2,5 +2,6 @@
 {
     public class ActorInputModel : BaseInputModel
     {
+        public string ActorBio { get; set; }
     }
 }

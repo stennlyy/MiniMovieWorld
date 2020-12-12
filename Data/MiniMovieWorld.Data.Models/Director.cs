@@ -19,6 +19,8 @@
 
         public string LastName { get; set; }
 
+        public string DirectorBio { get; set; }
+
         public int? Age { get; set; }
 
         public Nationality Nationality { get; set; }

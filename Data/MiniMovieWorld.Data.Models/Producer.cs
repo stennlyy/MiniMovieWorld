@@ -19,6 +19,8 @@
 
         public string LastName { get; set; }
 
+        public string ProducerBio { get; set; }
+
         public int? Age { get; set; }
 
         public Nationality Nationality { get; set; }

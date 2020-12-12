@@ -56,6 +56,7 @@
                     FirstName = producerInputModel.FirstName.Trim(),
                     MiddleName = producerInputModel.MiddleName,
                     LastName = producerInputModel.LastName.Trim(),
+                    ProducerBio = producerInputModel.ProducerBio,
                     Age = producerInputModel.Age,
                     Nationality = nationality,
                 };

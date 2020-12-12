@@ -16,6 +16,8 @@
 
         public string LastName { get; set; }
 
+        public string ProducerBio { get; set; }
+
         public int? Age { get; set; }
 
         public IEnumerable<MovieViewModel> ProducerMovies { get; set; }
