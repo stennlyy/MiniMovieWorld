@@ -41,7 +41,7 @@
         <label asp-for="Directors" class="form-control-plaintext font-weight-bold text-center" style="font-size:25px"></label>
         @foreach (var director in this.Model.Directors)
         {
-            <input asp-for="@director.FullName" class="form-control-plaintext text-center" />
+            <a asp-controller="Directors" asp-action="GetDirectorById" asp-route-id="@director.Id" class="form-control-plaintext text-center" style="color: #ff5f13">@director.FullName</a>
         }
     </div>
     <div class="form-group">
