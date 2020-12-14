@@ -1,7 +1,7 @@
 ﻿@model MiniMovieWorld.Web.ViewModels.Movies.AllMoviesViewModel
 
 @{
-    this.ViewData["Title"] = "All Movies";
+    this.ViewData["Title"] = $"{this.User.Identity.Name}'s Watchlist";
 }
 
 <h1 style="font-size: 75px" class="text-center">@this.ViewData["Title"]</h1>
@@ -32,12 +32,13 @@
                     <div class="text-center">
                         <a asp-controller="Movies" asp-action="GetMovieById" asp-route-id="@movie.Id" class="btn text-center">Details</a>
                     </div>
+                    <div class="text-center">
+                        <br />
+                        <a asp-controller="Users" asp-action="RemoveFromCollection" asp-route-id="@movie.Id" class="btn text-center">Remove</a>
+                    </div>
                 </div>
             </div>
         </div>
     }
 </div>
 <hr />
-
-<partial name="_PagingPartial" model="@this.Model" />
-

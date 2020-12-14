@@ -19,31 +19,44 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                    @if (this.User.IsInRole("Admin"))
-                    {
-                        <div class="dropdown">
-                            <button class="btn btn-outline-dark dropdown-toggle" type="button" data-toggle="dropdown">
-                                Admin Actions
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" asp-area="Administration" asp-controller="Administration" asp-action="Index">Admin Home Page</a>
-                                <a class="dropdown-item" asp-area="Administration" asp-controller="Administration" asp-action="AddActor">Add Actor</a>
-                                <a class="dropdown-item" asp-area="Administration" asp-controller="Administration" asp-action="AddProducer">Add Producer</a>
-                                <a class="dropdown-item" asp-area="Administration" asp-controller="Administration" asp-action="AddDirector">Add Director</a>
-                                <a class="dropdown-item" asp-area="Administration" asp-controller="Administration" asp-action="AddCategory">Add Category</a>
-                                <a class="dropdown-item" asp-area="Administration" asp-controller="Administration" asp-action="AddMovie">Add Movie</a>
-                            </div>
+                @if (this.User.IsInRole("Admin"))
+                {
+                    <div class="dropdown col-auto">
+                        <button class="btn btn-outline-dark dropdown-toggle" type="button" data-toggle="dropdown">
+                            Admin Actions
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" asp-area="Administration" asp-controller="Administration" asp-action="Index">Admin Home Page</a>
+                            <a class="dropdown-item" asp-area="Administration" asp-controller="Administration" asp-action="AddActor">Add Actor</a>
+                            <a class="dropdown-item" asp-area="Administration" asp-controller="Administration" asp-action="AddProducer">Add Producer</a>
+                            <a class="dropdown-item" asp-area="Administration" asp-controller="Administration" asp-action="AddDirector">Add Director</a>
+                            <a class="dropdown-item" asp-area="Administration" asp-controller="Administration" asp-action="AddCategory">Add Category</a>
+                            <a class="dropdown-item" asp-area="Administration" asp-controller="Administration" asp-action="AddMovie">Add Movie</a>
                         </div>
-                        <div class="col-auto">
-                            <a class="btn btn-outline-secondary" asp-area="" asp-controller="Movies" asp-action="All">All Movies</a>
-                        </div>
-                    }
-                    @if (!this.User.IsInRole("Admin"))
-                    {
-                        <div class=" col-auto">
-                            <a class="btn btn-outline-secondary" asp-area="" asp-controller="Movies" asp-action="All">All Movies</a>
-                        </div>
-                    }
+                    </div>
+                    <div class="col-auto">
+                        <a class="btn btn-outline-secondary" asp-area="" asp-controller="Movies" asp-action="All">All Movies</a>
+                    </div>
+
+                    <div class=" col-auto">
+                        <a class="btn btn-outline-secondary" asp-area="" asp-controller="Users" asp-action="UserMovieCollection">My Collection</a>
+                    </div>
+                }
+                @if (!this.User.IsInRole("Admin") && this.User.Identity.IsAuthenticated)
+                {
+                    <div class=" col-auto">
+                        <a class="btn btn-outline-secondary" asp-area="" asp-controller="Movies" asp-action="All">All Movies</a>
+                    </div>
+                    <div class=" col-auto">
+                        <a class="btn btn-outline-secondary" asp-area="" asp-controller="Users" asp-action="UserMovieCollection">My Collection</a>
+                    </div>
+                }
+                @if (!this.User.IsInRole("Admin") && !this.User.Identity.IsAuthenticated)
+                {
+                    <div class=" col-auto">
+                        <a class="btn btn-outline-secondary" asp-area="" asp-controller="Movies" asp-action="All">All Movies</a>
+                    </div>
+                }
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                 </div>

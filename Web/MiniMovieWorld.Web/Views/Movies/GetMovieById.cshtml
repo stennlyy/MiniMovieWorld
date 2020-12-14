@@ -51,5 +51,11 @@
             <input asp-for="@categories.CategoryName" class="form-control-plaintext text-center" />
         }
     </div>
+    @if (this.User.Identity.IsAuthenticated)
+    {
+        <div class="text-center">
+            <a asp-controller="Users" asp-action="AddToCollection" asp-route-id="@this.Model.Id" class="btn text-center">Add To Collection</a>
+        </div>
+    }
 </div>
 

@@ -24,6 +24,7 @@
                 .Where(x => x.Id == id)
                 .Select(x => new MovieViewModel
                 {
+                    Id = x.Id,
                     Title = x.Title,
                     Synopsis = x.Synopsis,
                     Duration = x.Duration,
