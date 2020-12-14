@@ -37,23 +37,31 @@
 
         public async Task AddMovieAsync(MovieInputModel movieInputModel)
         {
-            var image = await this.UploadImageAsync(movieInputModel);
-
-            var movie = new Movie
+            try
             {
-                Image = image,
-                Title = movieInputModel.Title.Trim(),
-                Duration = TimeSpan.FromMinutes(movieInputModel.Duration),
-                Synopsis = movieInputModel.Synopsis.Trim(),
-            };
+                var movie = new Movie
+                {
+                    Title = movieInputModel.Title.Trim(),
+                    Duration = TimeSpan.FromMinutes(movieInputModel.Duration),
+                    Synopsis = movieInputModel.Synopsis.Trim(),
+                };
 
-            this.AddActorsToMovie(movieInputModel, movie);
-            this.AddProducersToMovie(movieInputModel, movie);
-            this.AddDirectorsToMovie(movieInputModel, movie);
-            await this.AddCategoriesToMovieAsync(movieInputModel, movie);
+                this.AddActorsToMovie(movieInputModel, movie);
+                this.AddProducersToMovie(movieInputModel, movie);
+                this.AddDirectorsToMovie(movieInputModel, movie);
+                await this.AddCategoriesToMovieAsync(movieInputModel, movie);
 
-            await this.moviesRepository.AddAsync(movie);
-            await this.moviesRepository.SaveChangesAsync();
+                var image = await this.UploadImageAsync(movieInputModel);
+
+                movie.Image = image;
+
+                await this.moviesRepository.AddAsync(movie);
+                await this.moviesRepository.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
         }
 
         private async Task<string> UploadImageAsync(MovieInputModel movieInputModel)
@@ -111,73 +119,94 @@
 
         private void AddDirectorsToMovie(MovieInputModel movieInputModel, Movie movie)
         {
-            foreach (var currentDirector in movieInputModel.Directors)
+            try
             {
-                if (string.IsNullOrEmpty(currentDirector.FirstName))
+                foreach (var currentDirector in movieInputModel.Directors)
                 {
-                    continue;
+                    if (string.IsNullOrEmpty(currentDirector.FirstName))
+                    {
+                        continue;
+                    }
+
+                    var names = currentDirector.FirstName.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToArray();
+
+                    var director = this.directorsRepository
+                        .All()
+                        .Where(x => x.FirstName == names[0] && x.LastName == names[1])
+                        .FirstOrDefault();
+
+                    movie.Directors.Add(new DirectorMovie
+                    {
+                        Director = director,
+                        Movie = movie,
+                    });
                 }
-
-                var names = currentDirector.FirstName.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToArray();
-
-                var director = this.directorsRepository
-                    .All()
-                    .Where(x => x.FirstName == names[0] && x.LastName == names[1])
-                    .FirstOrDefault();
-
-                movie.Directors.Add(new DirectorMovie
-                {
-                    Director = director,
-                    Movie = movie,
-                });
+            }
+            catch (Exception)
+            {
+                throw new InvalidOperationException("Invalid Director!");
             }
         }
 
         private void AddProducersToMovie(MovieInputModel movieInputModel, Movie movie)
         {
-            foreach (var currentProducer in movieInputModel.Producers)
+            try
             {
-                if (string.IsNullOrEmpty(currentProducer.FirstName))
+                foreach (var currentProducer in movieInputModel.Producers)
                 {
-                    continue;
+                    if (string.IsNullOrEmpty(currentProducer.FirstName))
+                    {
+                        continue;
+                    }
+
+                    var names = currentProducer.FirstName.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToArray();
+
+                    var producer = this.producersRepository
+                        .All()
+                        .Where(x => x.FirstName == names[0] && x.LastName == names[1])
+                        .FirstOrDefault();
+
+                    movie.Producers.Add(new ProducerMovie
+                    {
+                        Producer = producer,
+                        Movie = movie,
+                    });
                 }
-
-                var names = currentProducer.FirstName.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToArray();
-
-                var producer = this.producersRepository
-                    .All()
-                    .Where(x => x.FirstName == names[0] && x.LastName == names[1])
-                    .FirstOrDefault();
-
-                movie.Producers.Add(new ProducerMovie
-                {
-                    Producer = producer,
-                    Movie = movie,
-                });
+            }
+            catch (Exception)
+            {
+                throw new InvalidOperationException("Invalid Producer!");
             }
         }
 
         private void AddActorsToMovie(MovieInputModel movieInputModel, Movie movie)
         {
-            foreach (var currentActor in movieInputModel.Actors)
+            try
             {
-                if (string.IsNullOrEmpty(currentActor.FirstName))
+                foreach (var currentActor in movieInputModel.Actors)
                 {
-                    continue;
+                    if (string.IsNullOrEmpty(currentActor.FirstName))
+                    {
+                        continue;
+                    }
+
+                    var names = currentActor.FirstName.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToArray();
+
+                    var actor = this.actorsRepository
+                        .All()
+                        .Where(x => x.FirstName == names[0] && x.LastName == names[1])
+                        .FirstOrDefault();
+
+                    movie.Actors.Add(new ActorMovie
+                    {
+                        Actor = actor,
+                        Movie = movie,
+                    });
                 }
-
-                var names = currentActor.FirstName.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToArray();
-
-                var actor = this.actorsRepository
-                    .All()
-                    .Where(x => x.FirstName == names[0] && x.LastName == names[1])
-                    .FirstOrDefault();
-
-                movie.Actors.Add(new ActorMovie
-                {
-                    Actor = actor,
-                    Movie = movie,
-                });
+            }
+            catch (Exception)
+            {
+                throw new InvalidOperationException("Invalid Actor!");
             }
         }
     }

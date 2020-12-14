@@ -46,10 +46,10 @@
                 .Where(x => x.FirstName == directorInputModel.FirstName && x.LastName == directorInputModel.LastName)
                 .FirstOrDefault();
 
-            var image = await this.UploadImageAsync(directorInputModel);
-
             if (director == null)
             {
+                var image = await this.UploadImageAsync(directorInputModel);
+
                 var newDrector = new Director
                 {
                     Image = image,

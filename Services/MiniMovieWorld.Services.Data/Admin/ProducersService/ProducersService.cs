@@ -46,10 +46,10 @@
                 .Where(x => x.FirstName == producerInputModel.FirstName && x.LastName == producerInputModel.LastName)
                 .FirstOrDefault();
 
-            var image = await this.UploadImageAsync(producerInputModel);
-
             if (producer == null)
             {
+                var image = await this.UploadImageAsync(producerInputModel);
+
                 var newProducer = new Producer
                 {
                     Image = image,
