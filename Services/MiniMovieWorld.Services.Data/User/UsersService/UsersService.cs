@@ -57,7 +57,7 @@
             await this.userMoviesRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<MovieViewModel> GetUserMovieCollection(string userId)
+        public ICollection<MovieViewModel> GetUserMovieCollection(string userId)
         {
             var movies = this.userMoviesRepository
                 .All()

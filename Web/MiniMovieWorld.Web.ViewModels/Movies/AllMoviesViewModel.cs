@@ -5,6 +5,10 @@
 
     public class AllMoviesViewModel : PagingViewModel
     {
-        public IEnumerable<MovieViewModel> Movies { get; set; }
+        public string Input { get; set; }
+
+        public ICollection<MovieViewModel> Movies { get; set; }
+
+        public int Count => this.Movies.Count;
     }
 }

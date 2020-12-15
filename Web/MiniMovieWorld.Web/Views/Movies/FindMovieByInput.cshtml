@@ -1,23 +1,11 @@
 ﻿@model MiniMovieWorld.Web.ViewModels.Movies.AllMoviesViewModel
 
 @{
-    this.ViewData["Title"] = "All Movies";
+    this.ViewData["Title"] = $"Found results for: {this.Model.Input}";
 }
 
-<h1 style="font-size: 75px" class="text-center">@this.ViewData["Title"]</h1>
-
-<div class="text-center">
-    <form method="get" asp-controller="Movies" asp-action="FindMovieByInput">
-        <div class="form-group">
-            <br />
-            <input class="form-control" type="text" name="input" placeholder="Search Movies">
-            <div>
-                <br />
-                <input type="submit" value="Find Movie" class="btn " />
-            </div>
-        </div>
-    </form>
-</div>
+<h1 style="font-size: 65px" class="text-center">@this.ViewData["Title"]</h1>
+<h5 class="text-center" style="color: #ff5f13">Found movies: @this.Model.Count</h5>
 
 <hr />
 <div class="row">
@@ -51,6 +39,3 @@
     }
 </div>
 <hr />
-
-<partial name="_PagingPartial" model="@this.Model" />
-

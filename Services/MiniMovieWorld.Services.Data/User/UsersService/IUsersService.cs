@@ -8,7 +8,7 @@
 
     public interface IUsersService
     {
-        public IEnumerable<MovieViewModel> GetUserMovieCollection(string userId);
+        public ICollection<MovieViewModel> GetUserMovieCollection(string userId);
 
         public Task AddMovieToUserCollectionAsync(int movieId, ApplicationUser userId);
 

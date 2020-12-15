@@ -6,39 +6,47 @@
 
 <h1 style="font-size: 75px" class="text-center">@this.ViewData["Title"]</h1>
 
-<hr />
-<div class="row">
-    @foreach (var movie in this.Model.Movies)
-    {
-        <div class="col-auto">
-            <div class="card" style="width: 10rem;">
-                <img src="~/images/MovieImages/@movie.Image" class="card-img-top">
-                <div class="card-body">
-                    <h5 class="card-title font-weight-bolder text-center" style="color: #ff5f13">@movie.Title</h5>
-                    <h6 class="card-title font-weight-bold text-center">Duration</h6>
-                    <p class="card-text font-weight-light text-center">@movie.Duration</p>
-                    @if (movie.Categories.Count() == 1)
-                    {
-                        <h6 class="card-title font-weight-bold text-center">Category</h6>
-                    }
-                    @if (movie.Categories.Count() > 1)
-                    {
-                        <h6 class="card-title font-weight-bold text-center">Categories</h6>
-                    }
-                    @foreach (var category in movie.Categories)
-                    {
-                        <p class="card-text font-weight-light text-center">@category.CategoryName</p>
-                    }
-                    <div class="text-center">
-                        <a asp-controller="Movies" asp-action="GetMovieById" asp-route-id="@movie.Id" class="btn text-center">Details</a>
-                    </div>
-                    <div class="text-center">
-                        <br />
-                        <a asp-controller="Users" asp-action="RemoveFromCollection" asp-route-id="@movie.Id" class="btn text-center">Remove</a>
+@if (this.Model.Movies.Count == 0)
+{
+    <h2 style="font-size: 75px ;color: #ff5f13" class="text-center">Empty Watchlist!</h2>
+}
+
+@if (this.Model.Movies.Count > 0)
+{
+    <hr />
+    <div class="row">
+        @foreach (var movie in this.Model.Movies)
+        {
+            <div class="col-auto">
+                <div class="card" style="width: 10rem;">
+                    <img src="~/images/MovieImages/@movie.Image" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bolder text-center" style="color: #ff5f13">@movie.Title</h5>
+                        <h6 class="card-title font-weight-bold text-center">Duration</h6>
+                        <p class="card-text font-weight-light text-center">@movie.Duration</p>
+                        @if (movie.Categories.Count() == 1)
+                        {
+                            <h6 class="card-title font-weight-bold text-center">Category</h6>
+                        }
+                        @if (movie.Categories.Count() > 1)
+                        {
+                            <h6 class="card-title font-weight-bold text-center">Categories</h6>
+                        }
+                        @foreach (var category in movie.Categories)
+                        {
+                            <p class="card-text font-weight-light text-center">@category.CategoryName</p>
+                        }
+                        <div class="text-center">
+                            <a asp-controller="Movies" asp-action="GetMovieById" asp-route-id="@movie.Id" class="btn text-center">Details</a>
+                        </div>
+                        <div class="text-center">
+                            <br />
+                            <a asp-controller="Users" asp-action="RemoveFromCollection" asp-route-id="@movie.Id" class="btn text-center">Remove</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    }
-</div>
-<hr />
+        }
+    </div>
+    <hr />
+}

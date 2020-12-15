@@ -36,5 +36,19 @@
 
             return this.View(movieViewModel);
         }
+
+        [HttpGet]
+        public IActionResult FindMovieByInput(string input)
+        {
+            var movies = this.userMoviesService.SearchMovieByInput(input);
+
+            var moviesViewModel = new AllMoviesViewModel
+            {
+                Input = input,
+                Movies = movies,
+            };
+
+            return this.View(moviesViewModel);
+        }
     }
 }

@@ -7,9 +7,11 @@
 
     public interface IUserMoviesService
     {
+        public ICollection<MovieViewModel> SearchMovieByInput(string input);
+
         public MovieViewModel GetMovie(int id);
 
-        public IEnumerable<MovieViewModel> GetAllMovies(int page, int itemsPerPage);
+        public ICollection<MovieViewModel> GetAllMovies(int page, int itemsPerPage);
 
         public int GetMoviesCount();
     }
