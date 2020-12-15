@@ -47,8 +47,8 @@
                 };
 
                 this.AddActorsToMovie(movieInputModel, movie);
-                this.AddProducersToMovie(movieInputModel, movie);
                 this.AddDirectorsToMovie(movieInputModel, movie);
+                this.AddProducersToMovie(movieInputModel, movie);
                 await this.AddCategoriesToMovieAsync(movieInputModel, movie);
 
                 var image = await this.UploadImageAsync(movieInputModel);
@@ -119,6 +119,8 @@
 
         private void AddDirectorsToMovie(MovieInputModel movieInputModel, Movie movie)
         {
+            var currentDirectorName = string.Empty;
+
             try
             {
                 foreach (var currentDirector in movieInputModel.Directors)
@@ -127,6 +129,8 @@
                     {
                         continue;
                     }
+
+                    currentDirectorName = currentDirector.FirstName;
 
                     var names = currentDirector.FirstName.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToArray();
 
@@ -144,12 +148,14 @@
             }
             catch (Exception)
             {
-                throw new InvalidOperationException("Invalid Director!");
+                throw new InvalidOperationException($"Invalid Director! - {currentDirectorName}");
             }
         }
 
         private void AddProducersToMovie(MovieInputModel movieInputModel, Movie movie)
         {
+            var currentProducerName = string.Empty;
+
             try
             {
                 foreach (var currentProducer in movieInputModel.Producers)
@@ -158,6 +164,8 @@
                     {
                         continue;
                     }
+
+                    currentProducerName = currentProducer.FirstName;
 
                     var names = currentProducer.FirstName.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToArray();
 
@@ -175,12 +183,14 @@
             }
             catch (Exception)
             {
-                throw new InvalidOperationException("Invalid Producer!");
+                throw new InvalidOperationException($"Invalid Producer! - {currentProducerName}");
             }
         }
 
         private void AddActorsToMovie(MovieInputModel movieInputModel, Movie movie)
         {
+            var currentActorName = string.Empty;
+
             try
             {
                 foreach (var currentActor in movieInputModel.Actors)
@@ -189,6 +199,8 @@
                     {
                         continue;
                     }
+
+                    currentActorName = currentActor.FirstName;
 
                     var names = currentActor.FirstName.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToArray();
 
@@ -206,7 +218,7 @@
             }
             catch (Exception)
             {
-                throw new InvalidOperationException("Invalid Actor!");
+                throw new InvalidOperationException($"Invalid Actor! - {currentActorName}");
             }
         }
     }
