@@ -37,31 +37,25 @@
 
         public async Task AddMovieAsync(MovieInputModel movieInputModel)
         {
-            try
+            var movie = new Movie
             {
-                var movie = new Movie
-                {
-                    Title = movieInputModel.Title.Trim(),
-                    Duration = TimeSpan.FromMinutes(movieInputModel.Duration),
-                    Synopsis = movieInputModel.Synopsis.Trim(),
-                };
+                Title = movieInputModel.Title.Trim(),
+                Year = movieInputModel.Year,
+                Duration = TimeSpan.FromMinutes(movieInputModel.Duration),
+                Synopsis = movieInputModel.Synopsis.Trim(),
+            };
 
-                this.AddActorsToMovie(movieInputModel, movie);
-                this.AddDirectorsToMovie(movieInputModel, movie);
-                this.AddProducersToMovie(movieInputModel, movie);
-                await this.AddCategoriesToMovieAsync(movieInputModel, movie);
+            this.AddActorsToMovie(movieInputModel, movie);
+            this.AddDirectorsToMovie(movieInputModel, movie);
+            this.AddProducersToMovie(movieInputModel, movie);
+            await this.AddCategoriesToMovieAsync(movieInputModel, movie);
 
-                var image = await this.UploadImageAsync(movieInputModel);
+            var image = await this.UploadImageAsync(movieInputModel);
 
-                movie.Image = image;
+            movie.Image = image;
 
-                await this.moviesRepository.AddAsync(movie);
-                await this.moviesRepository.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                throw new InvalidOperationException(ex.Message);
-            }
+            await this.moviesRepository.AddAsync(movie);
+            await this.moviesRepository.SaveChangesAsync();
         }
 
         private async Task<string> UploadImageAsync(MovieInputModel movieInputModel)
@@ -214,6 +208,11 @@
                         Actor = actor,
                         Movie = movie,
                     });
+
+                    if (actor == null)
+                    {
+                        throw new InvalidOperationException($"Invalid Actor! - {currentActorName}");
+                    }
                 }
             }
             catch (Exception)

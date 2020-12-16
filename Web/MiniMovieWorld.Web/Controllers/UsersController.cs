@@ -6,6 +6,7 @@
     using Microsoft.AspNetCore.Mvc;
     using MiniMovieWorld.Data.Models;
     using MiniMovieWorld.Services.Data.User.UsersService;
+    using MiniMovieWorld.Web.ViewModels.Actors;
     using MiniMovieWorld.Web.ViewModels.Movies;
 
     public class UsersController : BaseController
@@ -33,11 +34,34 @@
             return this.View(viewModel);
         }
 
+        public async Task<IActionResult> FavouriteActors()
+        {
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+
+            var actors = this.usersService.GetUserFavouriteActors(currentUser.Id);
+
+            var viewModel = new AllActorsViewModel
+            {
+                Actors = actors,
+            };
+
+            return this.View(viewModel);
+        }
+
         public async Task<IActionResult> AddToCollection(int id)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
             await this.usersService.AddMovieToUserCollectionAsync(id, currentUser);
+
+            return this.RedirectToAction("UserMovieCollection");
+        }
+
+        public async Task<IActionResult> AddActorToFavourites(int id)
+        {
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+
+            await this.usersService.AddActorToUserFavourites(id, currentUser);
 
             return this.RedirectToAction("UserMovieCollection");
         }

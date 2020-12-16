@@ -17,6 +17,9 @@
         [Required]
         public string Title { get; set; }
 
+        [Range(1900, 2100)]
+        public int Year { get; set; }
+
         public double Duration { get; set; }
 
         [MinLength(10)]

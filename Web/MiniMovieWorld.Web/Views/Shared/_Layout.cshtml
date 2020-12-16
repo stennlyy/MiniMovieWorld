@@ -48,7 +48,7 @@
                         <a class="btn btn-outline-secondary" asp-area="" asp-controller="Movies" asp-action="All">All Movies</a>
                     </div>
                     <div class=" col-auto">
-                        <a class="btn btn-outline-secondary" asp-area="" asp-controller="Users" asp-action="UserMovieCollection">My Collection</a>
+                        <a class="btn btn-outline-secondary" asp-area="" asp-controller="Users" asp-action="UserMovieCollection">My Watchlist</a>
                     </div>
                 }
                 @if (!this.User.IsInRole("Admin") && !this.User.Identity.IsAuthenticated)

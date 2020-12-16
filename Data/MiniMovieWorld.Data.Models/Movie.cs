@@ -22,6 +22,10 @@
 
         public TimeSpan Duration { get; set; }
 
+        public int Year { get; set; }
+
+        public int? Rate { get; set; }
+
         public string Synopsis { get; set; }
 
         public virtual ICollection<DirectorMovie> Directors { get; set; }

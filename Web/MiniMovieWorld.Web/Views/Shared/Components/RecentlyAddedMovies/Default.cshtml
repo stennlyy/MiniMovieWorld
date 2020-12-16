@@ -1,0 +1,19 @@
+﻿@model MiniMovieWorld.Web.ViewModels.Movies.AllMoviesViewModel
+
+<h4 class="text-center">Recently Added Movies</h4>
+
+<div class="row text-center">
+    @foreach (var movie in this.Model.Movies)
+    {
+        <div class="col-auto">
+            <div class="card" style="width: 10rem;">
+                <img src="~/images/MovieImages/@movie.Image" class="card-img-top">
+                <div class="card-body">
+                    <div>
+                        <a asp-controller="Movies" asp-action="GetMovieById" asp-route-id="@movie.Id" style="color: #ff5f13">@movie.Title</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -48,4 +48,10 @@
             <a asp-controller="Movies" asp-action="GetMovieById" asp-route-id="@actorMovie.Id" class="form-control-plaintext text-center" style="color: #ff5f13">@actorMovie.Title</a>
         }
     </div>
+    @if (this.User.Identity.IsAuthenticated)
+    {
+        <div class="text-center">
+            <a asp-controller="Users" asp-action="AddActorToFavourites" asp-route-id="@this.Model.Id" class="btn text-center">Add To Favourites</a>
+        </div>
+    }
 </div>

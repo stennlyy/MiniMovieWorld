@@ -1,0 +1,28 @@
+﻿@model MiniMovieWorld.Web.ViewModels.Actors.AllActorsViewModel
+
+@{
+    this.ViewData["Title"] = $"{this.User.Identity.Name}'s favourite actors:";
+}
+
+<h1 style="font-size: 75px" class="text-center">@this.ViewData["Title"]</h1>
+
+<hr />
+<div class="row">
+    @foreach (var actor in this.Model.Actors)
+    {
+        <div class="col-auto">
+            <div class="card" style="width: 10rem;">
+                <img src="~/images/ActorImages/@actor.Image" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bolder text-center" style="color: #ff5f13">@actor.FirstName @actor.LastName</h5>
+                    <h6 class="card-title font-weight-bold text-center">Age</h6>
+                    <p class="card-text font-weight-light text-center">@actor.Age</p>
+                    <div class="text-center">
+                        <a asp-controller="Actors" asp-action="GetActorById" asp-route-id="@actor.Id" class="btn text-center">Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<hr />

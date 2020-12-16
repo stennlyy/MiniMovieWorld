@@ -4,10 +4,15 @@
     using System.Threading.Tasks;
 
     using MiniMovieWorld.Data.Models;
+    using MiniMovieWorld.Web.ViewModels.Actors;
     using MiniMovieWorld.Web.ViewModels.Movies;
 
     public interface IUsersService
     {
+        public ICollection<SingleActorViewModel> GetUserFavouriteActors(string userId);
+
+        public Task AddActorToUserFavourites(int actorId, ApplicationUser user);
+
         public ICollection<MovieViewModel> GetUserMovieCollection(string userId);
 
         public Task AddMovieToUserCollectionAsync(int movieId, ApplicationUser userId);
