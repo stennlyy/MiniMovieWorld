@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MiniMovieWorld.Data;
 
 namespace MiniMovieWorld.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201216182402_AlterColumnRate1")]
+    partial class AlterColumnRate1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -503,6 +505,9 @@ namespace MiniMovieWorld.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<double?>("Rate")
+                        .HasColumnType("float");
+
                     b.Property<string>("Synopsis")
                         .HasColumnType("nvarchar(max)");
 
@@ -743,45 +748,6 @@ namespace MiniMovieWorld.Data.Migrations
                     b.ToTable("UserMovies");
                 });
 
-            modelBuilder.Entity("MiniMovieWorld.Data.Models.UserRate", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int");
-
-                    b.Property<double>("Rate")
-                        .HasColumnType("float");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("MovieId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserRate");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("MiniMovieWorld.Data.Models.ApplicationRole", null)
@@ -970,23 +936,6 @@ namespace MiniMovieWorld.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("MiniMovieWorld.Data.Models.UserRate", b =>
-                {
-                    b.HasOne("MiniMovieWorld.Data.Models.Movie", "Movie")
-                        .WithMany("Ratings")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("MiniMovieWorld.Data.Models.ApplicationUser", "User")
-                        .WithMany("UserRatings")
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Movie");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("MiniMovieWorld.Data.Models.Actor", b =>
                 {
                     b.Navigation("ActorMovies");
@@ -1003,8 +952,6 @@ namespace MiniMovieWorld.Data.Migrations
                     b.Navigation("Roles");
 
                     b.Navigation("UserMovies");
-
-                    b.Navigation("UserRatings");
                 });
 
             modelBuilder.Entity("MiniMovieWorld.Data.Models.Category", b =>
@@ -1028,8 +975,6 @@ namespace MiniMovieWorld.Data.Migrations
                     b.Navigation("MovieUsers");
 
                     b.Navigation("Producers");
-
-                    b.Navigation("Ratings");
                 });
 
             modelBuilder.Entity("MiniMovieWorld.Data.Models.Producer", b =>

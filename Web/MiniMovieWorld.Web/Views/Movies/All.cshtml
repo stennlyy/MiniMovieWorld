@@ -30,6 +30,11 @@
                     <h5 class="card-title font-weight-bolder text-center" style="color: #ff5f13">@movie.Title</h5>
                     <h6 class="card-title font-weight-bold text-center">Duration</h6>
                     <p class="card-text font-weight-light text-center">@movie.Duration</p>
+                    @if (movie.UserRates > 0)
+                    {
+                        <h6 class="card-title font-weight-bold text-center">Rated</h6>
+                        <p class="card-text font-weight-light text-center">@movie.UserRates.ToString("N2")</p>
+                    }
                     @if (movie.Categories.Count() == 1)
                     {
                         <h6 class="card-title font-weight-bold text-center">Category</h6>

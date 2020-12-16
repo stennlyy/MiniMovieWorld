@@ -3,6 +3,8 @@
     using System;
     using System.Collections.Generic;
 
+    using MiniMovieWorld.Data.Models;
+
     public class MovieViewModel
     {
         public int Id { get; set; }
@@ -14,6 +16,8 @@
         public TimeSpan Duration { get; set; }
 
         public string Synopsis { get; set; }
+
+        public double UserRates { get; set; }
 
         public IEnumerable<ActorsViewModel> Actors { get; set; }
 

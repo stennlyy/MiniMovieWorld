@@ -12,7 +12,7 @@
 
 @if (this.Model.Movies.Count == 0)
 {
-    <h2 style="font-size: 75px ;color: #ff5f13" class="text-center">Empty Watchlist!</h2>
+    <h4 style="font-size: 75px ;color: #ff5f13" class="text-center">Empty Watchlist</h4>
 }
 
 
@@ -29,6 +29,11 @@
                         <h5 class="card-title font-weight-bolder text-center" style="color: #ff5f13">@movie.Title</h5>
                         <h6 class="card-title font-weight-bold text-center">Duration</h6>
                         <p class="card-text font-weight-light text-center">@movie.Duration</p>
+                        @if (movie.UserRates > 0)
+                        {
+                            <h6 class="card-title font-weight-bold text-center">Rated</h6>
+                            <p class="card-text font-weight-light text-center">@movie.UserRates.ToString("N2")</p>
+                        }
                         @if (movie.Categories.Count() == 1)
                         {
                             <h6 class="card-title font-weight-bold text-center">Category</h6>
@@ -41,8 +46,13 @@
                         {
                             <p class="card-text font-weight-light text-center">@category.CategoryName</p>
                         }
+
                         <div class="text-center">
                             <a asp-controller="Movies" asp-action="GetMovieById" asp-route-id="@movie.Id" class="btn text-center">Details</a>
+                        </div>
+                        <div class="text-center">
+                            <br />
+                            <a asp-controller="Movies" asp-action="RateMovie" asp-route-id="@movie.Id" class="btn text-center">Rate</a>
                         </div>
                         <div class="text-center">
                             <br />

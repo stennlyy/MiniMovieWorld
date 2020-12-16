@@ -14,6 +14,7 @@
             this.Actors = new HashSet<ActorMovie>();
             this.MovieUsers = new HashSet<UserMovie>();
             this.Categories = new HashSet<CategoryMovie>();
+            this.Ratings = new HashSet<UserRate>();
         }
 
         public string Image { get; set; }
@@ -23,8 +24,6 @@
         public TimeSpan Duration { get; set; }
 
         public int Year { get; set; }
-
-        public int? Rate { get; set; }
 
         public string Synopsis { get; set; }
 
@@ -37,5 +36,7 @@
         public virtual ICollection<UserMovie> MovieUsers { get; set; }
 
         public virtual ICollection<CategoryMovie> Categories { get; set; }
+
+        public virtual ICollection<UserRate> Ratings { get; set; }
     }
 }

@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
 
     using MiniMovieWorld.Data.Common.Repositories;
     using MiniMovieWorld.Data.Models;
@@ -29,6 +28,7 @@
                     Title = x.Title,
                     Synopsis = x.Synopsis,
                     Duration = x.Duration,
+                    UserRates = x.Ratings.Average(x => x.Rate),
                     Actors = x.Actors.Select(y => new ActorsViewModel
                     {
                         Id = y.ActorId,
@@ -72,6 +72,7 @@
                     Synopsis = x.Synopsis,
                     Duration = x.Duration,
                     Image = x.Image,
+                    UserRates = x.Ratings.Average(y => y.Rate),
                     Actors = x.Actors.Select(y => new ActorsViewModel
                     {
                         Id = y.Actor.Id,
@@ -116,6 +117,7 @@
                 Title = x.Title,
                 Synopsis = x.Synopsis,
                 Duration = x.Duration,
+                UserRates = x.Ratings.Average(y => y.Rate),
                 Actors = x.Actors.Select(y => new ActorsViewModel
                 {
                     Id = y.ActorId,

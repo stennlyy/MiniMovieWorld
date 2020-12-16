@@ -4,7 +4,6 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Microsoft.AspNetCore.Identity;
     using MiniMovieWorld.Data.Common.Repositories;
     using MiniMovieWorld.Data.Models;
     using MiniMovieWorld.Web.ViewModels.Actors;
@@ -104,6 +103,7 @@
                     Image = x.Movie.Image,
                     Title = x.Movie.Title,
                     Duration = x.Movie.Duration,
+                    UserRates = x.Movie.Ratings.Average(y => y.Rate),
                     Categories = x.Movie.Categories.Select(y => new CategoriesViewModel
                     {
                         CategoryName = y.Category.CategoryName,
