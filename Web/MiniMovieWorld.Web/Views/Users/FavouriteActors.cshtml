@@ -20,9 +20,14 @@
                     <div class="text-center">
                         <a asp-controller="Actors" asp-action="GetActorById" asp-route-id="@actor.Id" class="btn text-center">Details</a>
                     </div>
+                    <div class="text-center">
+                        <br />
+                        <a asp-controller="Users" asp-action="RemoveActor" asp-route-id="@actor.Id" class="btn text-center">Remove</a>
+                    </div>
                 </div>
             </div>
         </div>
+
     }
 </div>
 <hr />

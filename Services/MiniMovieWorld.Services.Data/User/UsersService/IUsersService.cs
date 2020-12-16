@@ -9,6 +9,8 @@
 
     public interface IUsersService
     {
+        public Task RemoveActor(int actorId, string userId);
+
         public ICollection<SingleActorViewModel> GetUserFavouriteActors(string userId);
 
         public Task AddActorToUserFavourites(int actorId, ApplicationUser user);

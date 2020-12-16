@@ -74,5 +74,14 @@
 
             return this.RedirectToAction("UserMovieCollection");
         }
+
+        public async Task<IActionResult> RemoveActor(int id)
+        {
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+
+            await this.usersService.RemoveActor(id, currentUser.Id);
+
+            return this.RedirectToAction("FavouriteActors");
+        }
     }
 }

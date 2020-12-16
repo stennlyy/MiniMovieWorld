@@ -80,6 +80,19 @@
             await this.userMoviesRepository.SaveChangesAsync();
         }
 
+        public async Task RemoveActor(int actorId, string userId)
+        {
+            var userActor = this.userActorsRepository.All().FirstOrDefault(x => x.Actor.Id == actorId && x.User.Id == userId);
+
+            if (userActor == null)
+            {
+                return;
+            }
+
+            this.userActorsRepository.HardDelete(userActor);
+            await this.userActorsRepository.SaveChangesAsync();
+        }
+
         public ICollection<MovieViewModel> GetUserMovieCollection(string userId)
         {
             var movies = this.userMoviesRepository
