@@ -30,6 +30,7 @@
                     LastName = x.LastName,
                     ActorBio = x.ActorBio,
                     Age = x.Age,
+                    UserActorRatings = x.ActorRates.Any() ? x.ActorRates.Average(y => y.Rate) : 0,
                     ActorMovies = x.ActorMovies.Select(y => new MovieViewModel
                     {
                         Id = y.Movie.Id,

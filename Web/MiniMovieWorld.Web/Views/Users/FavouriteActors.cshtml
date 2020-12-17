@@ -24,8 +24,17 @@
                         <h5 class="card-title font-weight-bolder text-center" style="color: #ff5f13">@actor.FirstName @actor.LastName</h5>
                         <h6 class="card-title font-weight-bold text-center">Age</h6>
                         <p class="card-text font-weight-light text-center">@actor.Age</p>
+                        @if (actor.UserActorRatings > 0)
+                        {
+                            <h6 class="card-title font-weight-bold text-center">Rated</h6>
+                            <p class="card-text font-weight-light text-center">@actor.UserActorRatings.ToString("N2")/10</p>
+                        }
                         <div class="text-center">
                             <a asp-controller="Actors" asp-action="GetActorById" asp-route-id="@actor.Id" class="btn text-center">Details</a>
+                        </div>
+                        <div class="text-center">
+                            <br />
+                            <a asp-controller="Actors" asp-action="RateActor" asp-route-id="@actor.Id" class="btn text-center">Rate</a>
                         </div>
                         <div class="text-center">
                             <br />

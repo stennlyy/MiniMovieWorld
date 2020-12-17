@@ -3,8 +3,6 @@
     using System;
     using System.Collections.Generic;
 
-    using MiniMovieWorld.Data.Models;
-
     public class MovieViewModel
     {
         public int Id { get; set; }

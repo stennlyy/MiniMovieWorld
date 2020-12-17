@@ -41,6 +41,14 @@
         <h5 class="form-control-plaintext text-center" />
         @this.Model.Age
     </div>
+    @if (this.Model.UserActorRatings > 0)
+    {
+        <div class="form-group">
+            <label asp-for="UserActorRatings" class="form-control-plaintext font-weight-bold text-center" style="font-size:25px">Rated</label>
+            <h5 class="form-control-plaintext text-center" />
+            @this.Model.UserActorRatings.ToString("N2")/10
+        </div>
+    }
     <div class="form-group">
         <label asp-for="ActorMovies" class="form-control-plaintext font-weight-bold text-center" style="font-size:25px">Starring In:</label>
         @foreach (var actorMovie in this.Model.ActorMovies)

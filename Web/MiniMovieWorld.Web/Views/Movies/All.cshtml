@@ -33,7 +33,7 @@
                     @if (movie.UserRates > 0)
                     {
                         <h6 class="card-title font-weight-bold text-center">Rated</h6>
-                        <p class="card-text font-weight-light text-center">@movie.UserRates.ToString("N2")</p>
+                        <p class="card-text font-weight-light text-center">@movie.UserRates.ToString("N2")/10</p>
                     }
                     @if (movie.Categories.Count() == 1)
                     {

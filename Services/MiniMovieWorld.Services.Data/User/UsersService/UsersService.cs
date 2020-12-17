@@ -103,7 +103,7 @@
                     Image = x.Movie.Image,
                     Title = x.Movie.Title,
                     Duration = x.Movie.Duration,
-                    UserRates = x.Movie.Ratings.Average(y => y.Rate),
+                    UserRates = x.Movie.Ratings.Any() ? x.Movie.Ratings.Average(y => y.Rate) : 0,
                     Categories = x.Movie.Categories.Select(y => new CategoriesViewModel
                     {
                         CategoryName = y.Category.CategoryName,
@@ -121,11 +121,12 @@
                 .Where(x => x.User.Id == userId)
                 .Select(x => new SingleActorViewModel
                 {
-                    Image = x.Actor.Image,
                     Id = x.Actor.Id,
+                    Image = x.Actor.Image,
                     FirstName = x.Actor.FirstName,
                     LastName = x.Actor.LastName,
                     Age = x.Actor.Age,
+                    UserActorRatings = x.Actor.ActorRates.Any() ? x.Actor.ActorRates.Average(y => y.Rate) : 0,
                 })
                 .ToList();
 

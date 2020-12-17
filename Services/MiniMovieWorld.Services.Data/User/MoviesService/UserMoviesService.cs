@@ -28,7 +28,7 @@
                     Title = x.Title,
                     Synopsis = x.Synopsis,
                     Duration = x.Duration,
-                    UserRates = x.Ratings.Average(x => x.Rate),
+                    UserRates = x.Ratings.Any() ? x.Ratings.Average(y => y.Rate) : 0,
                     Actors = x.Actors.Select(y => new ActorsViewModel
                     {
                         Id = y.ActorId,
@@ -72,7 +72,7 @@
                     Synopsis = x.Synopsis,
                     Duration = x.Duration,
                     Image = x.Image,
-                    UserRates = x.Ratings.Average(y => y.Rate),
+                    UserRates = x.Ratings.Any() ? x.Ratings.Average(y => y.Rate) : 0,
                     Actors = x.Actors.Select(y => new ActorsViewModel
                     {
                         Id = y.Actor.Id,
@@ -117,7 +117,7 @@
                 Title = x.Title,
                 Synopsis = x.Synopsis,
                 Duration = x.Duration,
-                UserRates = x.Ratings.Average(y => y.Rate),
+                UserRates = x.Ratings.Any() ? x.Ratings.Average(y => y.Rate) : 0,
                 Actors = x.Actors.Select(y => new ActorsViewModel
                 {
                     Id = y.ActorId,

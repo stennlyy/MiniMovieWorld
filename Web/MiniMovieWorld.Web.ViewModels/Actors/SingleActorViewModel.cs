@@ -20,6 +20,8 @@
 
         public int? Age { get; set; }
 
+        public double UserActorRatings { get; set; }
+
         public IEnumerable<MovieViewModel> ActorMovies { get; set; }
     }
 }

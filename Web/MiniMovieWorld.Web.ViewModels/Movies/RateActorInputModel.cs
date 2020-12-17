@@ -1,6 +1,6 @@
 ﻿namespace MiniMovieWorld.Web.ViewModels.Movies
 {
-    public class RateMovieInputModel : BaseRateInputModel
+    public class RateActorInputModel : BaseRateInputModel
     {
     }
 }
