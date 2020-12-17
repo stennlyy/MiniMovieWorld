@@ -14,7 +14,7 @@
     public class ActorsService : IActorsService
     {
         private readonly IDeletableEntityRepository<Actor> actorsRepository;
-        private readonly IDeletableEntityRepository<Nationality> nationalityRepository;
+        private readonly IDeletableEntityRepository<Nationality> nationalitiesRepository;
         private readonly IWebHostEnvironment webHostEnvironment;
 
         public ActorsService(
@@ -23,7 +23,7 @@
             IWebHostEnvironment webHostEnvironment)
         {
             this.actorsRepository = actorsRepository;
-            this.nationalityRepository = nationalityRepository;
+            this.nationalitiesRepository = nationalityRepository;
             this.webHostEnvironment = webHostEnvironment;
         }
 
@@ -42,18 +42,25 @@
 
         public async Task AddActorAsync(ActorInputModel actorInputModel)
         {
-            var nationality = this.nationalityRepository
+            var nationality = this.nationalitiesRepository
                 .All()
                 .Where(x => x.NationName == actorInputModel.Nationality)
                 .FirstOrDefault();
 
             if (nationality == null)
             {
-                await this.nationalityRepository.AddAsync(new Nationality
+                await this.nationalitiesRepository.AddAsync(new Nationality
                 {
                     NationName = actorInputModel.Nationality.Trim(),
                 });
+
+                await this.nationalitiesRepository.SaveChangesAsync();
             }
+
+            nationality = this.nationalitiesRepository
+                .All()
+                .Where(x => x.NationName == actorInputModel.Nationality)
+                .FirstOrDefault();
 
             var actor = this.actorsRepository
                 .All()

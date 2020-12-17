@@ -39,6 +39,8 @@
                 {
                     NationName = directorInputModel.Nationality.Trim(),
                 });
+
+                await this.nationalitiesRepository.SaveChangesAsync();
             }
 
             var director = this.directorsRepository
@@ -60,6 +62,8 @@
                     Age = directorInputModel.Age,
                     Nationality = nationality,
                 };
+
+                newDrector.Nationality.NationName = directorInputModel.Nationality;
 
                 await this.directorsRepository.AddAsync(newDrector);
             }

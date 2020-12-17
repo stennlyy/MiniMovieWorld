@@ -17,6 +17,8 @@
 
         public double UserRates { get; set; }
 
+        public int Year { get; set; }
+
         public IEnumerable<ActorsViewModel> Actors { get; set; }
 
         public IEnumerable<ProducersViewModel> Producers { get; set; }

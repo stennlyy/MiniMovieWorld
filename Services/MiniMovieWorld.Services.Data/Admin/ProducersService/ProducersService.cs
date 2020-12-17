@@ -13,7 +13,7 @@
     public class ProducersService : IProducersService
     {
         private readonly IDeletableEntityRepository<Producer> producersRepository;
-        private readonly IDeletableEntityRepository<Nationality> nationalityRepository;
+        private readonly IDeletableEntityRepository<Nationality> nationalitiesRepository;
         private readonly IWebHostEnvironment webHostEnvironment;
 
         public ProducersService(
@@ -22,23 +22,25 @@
             IWebHostEnvironment webHostEnvironment)
         {
             this.producersRepository = producersRepository;
-            this.nationalityRepository = nationalityRepository;
+            this.nationalitiesRepository = nationalityRepository;
             this.webHostEnvironment = webHostEnvironment;
         }
 
         public async Task AddProducerAsync(ProducerInputModel producerInputModel)
         {
-            var nationality = this.nationalityRepository
+            var nationality = this.nationalitiesRepository
                 .All()
                 .Where(x => x.NationName == producerInputModel.Nationality)
                 .FirstOrDefault();
 
             if (nationality == null)
             {
-                await this.nationalityRepository.AddAsync(new Nationality
+                await this.nationalitiesRepository.AddAsync(new Nationality
                 {
                     NationName = producerInputModel.Nationality.Trim(),
                 });
+
+                await this.nationalitiesRepository.SaveChangesAsync();
             }
 
             var producer = this.producersRepository

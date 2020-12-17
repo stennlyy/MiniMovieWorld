@@ -61,7 +61,7 @@
 
             await this.actorsService.AddActorAsync(actorInputModel);
 
-            return this.RedirectToAction("Index");
+            return this.RedirectToAction("Index", "Home", new { area = string.Empty });
         }
 
         public IActionResult AddProducer()
@@ -79,7 +79,7 @@
 
             await this.producersService.AddProducerAsync(producerInputModel);
 
-            return this.RedirectToAction("Index");
+            return this.RedirectToAction("Index", "Home", new { area = string.Empty });
         }
 
         public IActionResult AddDirector()
@@ -97,7 +97,7 @@
 
             await this.directorsService.AddDirectorAsync(directorInputModel);
 
-            return this.RedirectToAction("Index");
+            return this.RedirectToAction("Index", "Home", new { area = string.Empty });
         }
 
         public IActionResult AddMovie()
@@ -115,7 +115,7 @@
 
             await this.moviesService.AddMovieAsync(movieInputModel);
 
-            return this.RedirectToAction("Index");
+            return this.RedirectToAction("Index", "Home", new { area = string.Empty });
         }
 
         public IActionResult AddCategory()
@@ -133,7 +133,7 @@
 
             await this.categoriesService.AddCategoryAsync(categoryInputModel);
 
-            return this.RedirectToAction("Index");
+            return this.RedirectToAction("Index", "Home", new { area = string.Empty });
         }
     }
 }

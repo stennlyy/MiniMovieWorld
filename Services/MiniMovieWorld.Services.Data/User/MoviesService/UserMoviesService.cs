@@ -29,6 +29,7 @@
                     Synopsis = x.Synopsis,
                     Duration = x.Duration,
                     UserRates = x.Ratings.Any() ? x.Ratings.Average(y => y.Rate) : 0,
+                    Year = x.Year,
                     Actors = x.Actors.Select(y => new ActorsViewModel
                     {
                         Id = y.ActorId,
@@ -73,6 +74,7 @@
                     Duration = x.Duration,
                     Image = x.Image,
                     UserRates = x.Ratings.Any() ? x.Ratings.Average(y => y.Rate) : 0,
+                    Year = x.Year,
                     Actors = x.Actors.Select(y => new ActorsViewModel
                     {
                         Id = y.Actor.Id,
@@ -118,6 +120,7 @@
                 Synopsis = x.Synopsis,
                 Duration = x.Duration,
                 UserRates = x.Ratings.Any() ? x.Ratings.Average(y => y.Rate) : 0,
+                Year = x.Year,
                 Actors = x.Actors.Select(y => new ActorsViewModel
                 {
                     Id = y.ActorId,
@@ -144,7 +147,7 @@
                     CategoryName = y.Category.CategoryName,
                 }).ToList(),
             }).ToList();
-
+            ;
             return movies;
         }
 

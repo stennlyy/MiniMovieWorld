@@ -1,0 +1,24 @@
+﻿@model MiniMovieWorld.Web.ViewModels.Actors.AllActorsViewModel
+
+<h3 class="text-center">Highest Rated Actors</h3>
+<br />
+<div class="row text-center">
+    @foreach (var actor in this.Model.Actors)
+    {
+        <div class="col-auto">
+            <div class="card" style="width: 10rem;">
+                <img src="~/images/actorImages/@actor.Image" class="card-img-top">
+                <div class="card-body">
+                    <div>
+                        <a asp-controller="Actors" asp-action="GetActorById" asp-route-id="@actor.Id" class="card-title card-title font-weight-bolder text-center" style="color: #ff5f13">@actor.FirstName @actor.LastName</a>
+                    </div>
+                </div>
+                @if (actor.UserActorRatings > 0)
+                {
+                    <h6 class="card-title font-weight-bold text-center">Rated</h6>
+                    <p class="card-text font-weight-light text-center">@actor.UserActorRatings.ToString("N2")/10</p>
+                }
+            </div>
+        </div>
+    }
+</div>

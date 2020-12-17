@@ -133,6 +133,11 @@
                         .Where(x => x.FirstName == names[0] && x.LastName == names[1])
                         .FirstOrDefault();
 
+                    if (director == null)
+                    {
+                        throw new InvalidOperationException($"Invalid Actor! - {currentDirector}");
+                    }
+
                     movie.Directors.Add(new DirectorMovie
                     {
                         Director = director,
@@ -167,6 +172,11 @@
                         .All()
                         .Where(x => x.FirstName == names[0] && x.LastName == names[1])
                         .FirstOrDefault();
+
+                    if (producer == null)
+                    {
+                        throw new InvalidOperationException($"Invalid Actor! - {currentProducer}");
+                    }
 
                     movie.Producers.Add(new ProducerMovie
                     {
@@ -203,16 +213,16 @@
                         .Where(x => x.FirstName == names[0] && x.LastName == names[1])
                         .FirstOrDefault();
 
+                    if (actor == null)
+                    {
+                        throw new InvalidOperationException($"Invalid Actor! - {currentActorName}");
+                    }
+
                     movie.Actors.Add(new ActorMovie
                     {
                         Actor = actor,
                         Movie = movie,
                     });
-
-                    if (actor == null)
-                    {
-                        throw new InvalidOperationException($"Invalid Actor! - {currentActorName}");
-                    }
                 }
             }
             catch (Exception)

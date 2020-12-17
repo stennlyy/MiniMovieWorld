@@ -104,6 +104,7 @@
                     Title = x.Movie.Title,
                     Duration = x.Movie.Duration,
                     UserRates = x.Movie.Ratings.Any() ? x.Movie.Ratings.Average(y => y.Rate) : 0,
+                    Year = x.Movie.Year,
                     Categories = x.Movie.Categories.Select(y => new CategoriesViewModel
                     {
                         CategoryName = y.Category.CategoryName,
