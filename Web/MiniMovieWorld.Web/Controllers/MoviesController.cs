@@ -53,6 +53,11 @@
         [HttpGet]
         public IActionResult FindMovieByInput(string input)
         {
+            if (string.IsNullOrEmpty(input) || input.Length < 1 || input.Length > 30)
+            {
+                return this.RedirectToAction("All");
+            }
+
             var movies = this.userMoviesService.SearchMovieByInput(input);
 
             var moviesViewModel = new AllMoviesViewModel
