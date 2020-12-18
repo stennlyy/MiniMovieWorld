@@ -7,6 +7,8 @@
 <h1 style="font-size: 65px" class="text-center">@this.ViewData["Title"]</h1>
 <h5 class="text-center" style="color: #ff5f13">Found movies: @this.Model.Count</h5>
 
+<partial name="_SearchPartial" />
+
 @if (this.Model.Movies.Count > 0)
 {
     <hr />

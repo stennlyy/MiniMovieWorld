@@ -29,13 +29,16 @@
         <h5 class="form-control-plaintext text-center" />
         @this.Model.LastName
     </div>
-    <label asp-for="DirectorBio" class="form-control-plaintext font-weight-bold text-center" style="font-size:25px">Short Director Biography</label>
-    <div class="row text-center">
-        <div class="text-center">
-            <p class="item-description text-center">
-                @this.Model.DirectorBio
+    @if (!string.IsNullOrEmpty(this.Model.DirectorBio))
+    {
+        <label asp-for="DirectorBio" class="form-control-plaintext font-weight-bold text-center" style="font-size:25px">Short Director Biography</label>
+        <div class="row text-center">
+            <div class="text-center">
+                <p class="item-description text-center">
+                    @this.Model.DirectorBio
+            </div>
         </div>
-    </div>
+    }
     <div class="form-group">
         <label asp-for="Age" class="form-control-plaintext font-weight-bold text-center" style="font-size:25px"></label>
         <h5 class="form-control-plaintext text-center" />

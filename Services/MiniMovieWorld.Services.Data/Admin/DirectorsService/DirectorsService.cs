@@ -43,6 +43,11 @@
                 await this.nationalitiesRepository.SaveChangesAsync();
             }
 
+            nationality = this.nationalitiesRepository
+                .All()
+                .Where(x => x.NationName == directorInputModel.Nationality)
+                .FirstOrDefault();
+
             var director = this.directorsRepository
                 .All()
                 .Where(x => x.FirstName == directorInputModel.FirstName && x.LastName == directorInputModel.LastName)
