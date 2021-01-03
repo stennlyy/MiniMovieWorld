@@ -1,0 +1,18 @@
+﻿@model MiniMovieWorld.Web.ViewModels.Comments.MovieAllCommentsViewModel
+
+@{
+    this.ViewData["Title"] = this.Model.MovieTitle;
+}
+
+<a asp-controller="Movies" asp-action="GetMovieById" asp-route-id="@this.Model.MovieId" style="font-size: 75px; color: #ff5f13" class="text-center">@this.ViewData["Title"]</a>
+
+@foreach (var movieComments in this.Model.MovieComments)
+{
+    @if (!string.IsNullOrEmpty(movieComments.Comment))
+    {
+        <div class="form-group">
+            <div class="form-control">@movieComments.Username - @movieComments.CreatedOn.ToShortDateString()</div>
+            <div class="form-control">@movieComments.Comment</div>
+        </div>
+    }
+}

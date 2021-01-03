@@ -1,0 +1,12 @@
+﻿@model MiniMovieWorld.Web.ViewModels.Movies.AddCommentInputModel
+
+<form method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Comment">Add Comment</label>
+        <textarea asp-for="Comment" class="form-control" rows="5"></textarea>
+    </div>
+    <div class="ol-md-6 offset-md-5">
+        <input type="submit" class="btn btn-outline-dark" />
+    </div>
+</form>

@@ -6,8 +6,11 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using MiniMovieWorld.Data.Models;
+    using MiniMovieWorld.Services.Data.User;
+    using MiniMovieWorld.Services.Data.User.CommentsService;
     using MiniMovieWorld.Services.Data.User.UsersService;
     using MiniMovieWorld.Web.ViewModels.Actors;
+    using MiniMovieWorld.Web.ViewModels.Comments;
     using MiniMovieWorld.Web.ViewModels.Movies;
 
     [Authorize]
@@ -15,11 +18,19 @@
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IUsersService usersService;
+        private readonly ICommentsService commentsService;
+        private readonly IUserMoviesService moviesService;
 
-        public UsersController(UserManager<ApplicationUser> userManager, IUsersService usersService)
+        public UsersController(
+            UserManager<ApplicationUser> userManager,
+            IUsersService usersService,
+            ICommentsService commentsService,
+            IUserMoviesService moviesService)
         {
             this.userManager = userManager;
             this.usersService = usersService;
+            this.commentsService = commentsService;
+            this.moviesService = moviesService;
         }
 
         public async Task<IActionResult> UserMovieCollection()
@@ -31,6 +42,42 @@
             var viewModel = new AllMoviesViewModel
             {
                 Movies = movies,
+            };
+
+            return this.View(viewModel);
+        }
+
+        public IActionResult AddComment()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddComment(AddCommentInputModel inputModel)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View();
+            }
+
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+
+            await this.commentsService.AddUserCommentToMovie(inputModel.Id, currentUser.Id, inputModel.Comment);
+
+            return this.RedirectToAction("GetMovieById", "Movies", new { id = inputModel.Id });
+        }
+
+        public IActionResult DisplayAllCommentsForMovie(int id)
+        {
+            var movieComments = this.commentsService.GetMovieComments(id);
+
+            var movie = this.moviesService.GetMovie(id);
+
+            var viewModel = new MovieAllCommentsViewModel
+            {
+                MovieId = movie.Id,
+                MovieTitle = movie.Title,
+                MovieComments = movieComments,
             };
 
             return this.View(viewModel);

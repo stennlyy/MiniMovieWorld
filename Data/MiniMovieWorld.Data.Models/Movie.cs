@@ -15,6 +15,7 @@
             this.MovieUsers = new HashSet<UserMovie>();
             this.Categories = new HashSet<CategoryMovie>();
             this.Ratings = new HashSet<UserRate>();
+            this.UserMovieComments = new HashSet<UserMovieComment>();
         }
 
         public string Image { get; set; }
@@ -38,5 +39,7 @@
         public virtual ICollection<CategoryMovie> Categories { get; set; }
 
         public virtual ICollection<UserRate> Ratings { get; set; }
+
+        public virtual ICollection<UserMovieComment> UserMovieComments { get; set; }
     }
 }

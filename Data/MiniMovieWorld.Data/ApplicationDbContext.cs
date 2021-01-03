@@ -45,6 +45,12 @@
 
         public DbSet<UserMovie> UserMovies { get; set; }
 
+        public DbSet<UserMovieComment> UserMovieComments { get; set; }
+
+        public DbSet<UserActorRate> UserActorRates { get; set; }
+
+        public DbSet<UserRate> UserRates { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

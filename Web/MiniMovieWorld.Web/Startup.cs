@@ -25,6 +25,7 @@
     using MiniMovieWorld.Services.Data.Admin.WritersService;
     using MiniMovieWorld.Services.Data.User;
     using MiniMovieWorld.Services.Data.User.ActorsService;
+    using MiniMovieWorld.Services.Data.User.CommentsService;
     using MiniMovieWorld.Services.Data.User.DirectorsService;
     using MiniMovieWorld.Services.Data.User.ProducersService;
     using MiniMovieWorld.Services.Data.User.RatesService;
@@ -88,6 +89,7 @@
             services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<IRatesService, RatesService>();
             services.AddTransient<IViewComponentsService, ViewComponentsService>();
+            services.AddTransient<ICommentsService, CommentsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

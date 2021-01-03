@@ -19,7 +19,7 @@
         public SingleDirectorViewModel GetDirectorById(int id)
         {
             var director = this.directorsRepository
-                .All()
+                .AllAsNoTracking()
                 .Where(x => x.Id == id)
                 .Select(x => new SingleDirectorViewModel
                 {

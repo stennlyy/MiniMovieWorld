@@ -20,6 +20,7 @@ namespace MiniMovieWorld.Data.Models
             this.FavouriteActors = new HashSet<UserActor>();
             this.UserRatings = new HashSet<UserRate>();
             this.UserActorRates = new HashSet<UserActorRate>();
+            this.UserMovieComments = new HashSet<UserMovieComment>();
         }
 
         // Audit info
@@ -45,5 +46,7 @@ namespace MiniMovieWorld.Data.Models
         public virtual ICollection<UserRate> UserRatings { get; set; }
 
         public virtual ICollection<UserActorRate> UserActorRates { get; set; }
+
+        public virtual ICollection<UserMovieComment> UserMovieComments { get; set; }
     }
 }

@@ -19,7 +19,7 @@
         public ICollection<MovieViewModel> SearchMovieByInput(string input)
         {
             var movie = this.moviesRepository
-                .All()
+                .AllAsNoTracking()
                 .Where(x => x.Title.Contains(input.Trim()))
                 .Select(x => new MovieViewModel
                 {
@@ -109,7 +109,7 @@
         public ICollection<MovieViewModel> GetAllMovies(int page, int itemsPerPage)
         {
             var movies = this.moviesRepository
-            .All()
+            .AllAsNoTracking()
             .Skip((page - 1) * itemsPerPage)
             .Take(itemsPerPage)
             .Select(x => new MovieViewModel

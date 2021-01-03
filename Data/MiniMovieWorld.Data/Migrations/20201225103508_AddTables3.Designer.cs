@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MiniMovieWorld.Data;
 
 namespace MiniMovieWorld.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201225103508_AddTables3")]
+    partial class AddTables3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -391,6 +393,40 @@ namespace MiniMovieWorld.Data.Migrations
                     b.HasIndex("MovieId");
 
                     b.ToTable("CategoryMovie");
+                });
+
+            modelBuilder.Entity("MiniMovieWorld.Data.Models.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("CommentText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("UserMovieCommentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("UserMovieCommentId");
+
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("MiniMovieWorld.Data.Models.Director", b =>
@@ -789,9 +825,6 @@ namespace MiniMovieWorld.Data.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<string>("Comment")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
@@ -956,6 +989,13 @@ namespace MiniMovieWorld.Data.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("Movie");
+                });
+
+            modelBuilder.Entity("MiniMovieWorld.Data.Models.Comment", b =>
+                {
+                    b.HasOne("MiniMovieWorld.Data.Models.UserMovieComment", null)
+                        .WithMany("Comments")
+                        .HasForeignKey("UserMovieCommentId");
                 });
 
             modelBuilder.Entity("MiniMovieWorld.Data.Models.Director", b =>
@@ -1155,6 +1195,11 @@ namespace MiniMovieWorld.Data.Migrations
             modelBuilder.Entity("MiniMovieWorld.Data.Models.Producer", b =>
                 {
                     b.Navigation("ProducerMovies");
+                });
+
+            modelBuilder.Entity("MiniMovieWorld.Data.Models.UserMovieComment", b =>
+                {
+                    b.Navigation("Comments");
                 });
 #pragma warning restore 612, 618
         }

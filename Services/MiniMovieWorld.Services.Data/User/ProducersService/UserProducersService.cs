@@ -19,7 +19,7 @@
         public SingleProducerViewModel GetProducerById(int id)
         {
             var producer = this.producersRepository
-                .All()
+                .AllAsNoTracking()
                 .Where(x => x.Id == id)
                 .Select(x => new SingleProducerViewModel
                 {

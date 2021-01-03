@@ -19,7 +19,7 @@
         public SingleActorViewModel GetActorById(int id)
         {
             var actor = this.actorsRepository
-                .All()
+                .AllAsNoTracking()
                 .Where(x => x.Id == id)
                 .Select(x => new SingleActorViewModel
                 {

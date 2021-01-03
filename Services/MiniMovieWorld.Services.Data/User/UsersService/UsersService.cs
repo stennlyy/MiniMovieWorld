@@ -95,7 +95,7 @@
         public ICollection<MovieViewModel> GetUserMovieCollection(string userId)
         {
             var movies = this.userMoviesRepository
-                .All()
+                .AllAsNoTracking()
                 .Where(x => x.User.Id == userId)
                 .Select(x => new MovieViewModel
                 {
@@ -118,7 +118,7 @@
         public ICollection<SingleActorViewModel> GetUserFavouriteActors(string userId)
         {
             var actors = this.userActorsRepository
-                .All()
+                .AllAsNoTracking()
                 .Where(x => x.User.Id == userId)
                 .Select(x => new SingleActorViewModel
                 {

@@ -11,7 +11,7 @@
         <img src="~/images/MovieImages/@this.Model.Image" class="img rounded" style="width: 20rem;" />
         <br />
     </div>
-    <div class="form-group">
+    <div class="form-group text-center">
         <label asp-for="Year" class="form-control-plaintext font-weight-bold text-center" style="font-size:25px">Released In</label>
         <h5 class="form-control-plaintext text-center" />
         @this.Model.Year
@@ -36,33 +36,38 @@
                 @this.Model.Synopsis
         </div>
     </div>
-    <div class="form-group">
-        <label asp-for="Actors" class="form-control-plaintext font-weight-bold text-center" style="font-size:25px"></label>
-        @foreach (var actor in this.Model.Actors)
-        {
-            <a asp-controller="Actors" asp-action="GetActorById" asp-route-id="@actor.Id" class="form-control-plaintext text-center" style="color: #ff5f13">@actor.FullName</a>
-        }
-    </div>
-    <div class="form-group">
-        <label asp-for="Producers" class="form-control-plaintext font-weight-bold text-center" style="font-size:25px"></label>
-        @foreach (var producer in this.Model.Producers)
-        {
-            <a asp-controller="Producers" asp-action="GetProducerById" asp-route-id="@producer.Id" class="form-control-plaintext text-center" style="color: #ff5f13">@producer.FullName</a>
-        }
-    </div>
-    <div class="form-group">
-        <label asp-for="Directors" class="form-control-plaintext font-weight-bold text-center" style="font-size:25px"></label>
-        @foreach (var director in this.Model.Directors)
-        {
-            <a asp-controller="Directors" asp-action="GetDirectorById" asp-route-id="@director.Id" class="form-control-plaintext text-center" style="color: #ff5f13">@director.FullName</a>
-        }
-    </div>
-    <div class="form-group">
-        <label asp-for="Categories" class="form-control-plaintext font-weight-bold text-center" style="font-size:25px"></label>
-        @foreach (var categories in this.Model.Categories)
-        {
-            <input asp-for="@categories.CategoryName" class="form-control-plaintext text-center" />
-        }
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <label asp-for="Actors" class="form-control-plaintext font-weight-bold text-center" style="font-size:25px"></label>
+                @foreach (var actor in this.Model.Actors)
+                {
+                    <a asp-controller="Actors" asp-action="GetActorById" asp-route-id="@actor.Id" class="form-control-plaintext text-center" style="color: #ff5f13">@actor.FullName</a>
+                }
+            </div>
+            <div class="col">
+                <label asp-for="Producers" class="form-control-plaintext font-weight-bold text-center" style="font-size:25px"></label>
+                @foreach (var producer in this.Model.Producers)
+                {
+                    <a asp-controller="Producers" asp-action="GetProducerById" asp-route-id="@producer.Id" class="form-control-plaintext text-center" style="color: #ff5f13">@producer.FullName</a>
+                }
+            </div>
+            <div class="col">
+                <label asp-for="Directors" class="form-control-plaintext font-weight-bold text-center" style="font-size:25px"></label>
+                @foreach (var director in this.Model.Directors)
+                {
+                    <a asp-controller="Directors" asp-action="GetDirectorById" asp-route-id="@director.Id" class="form-control-plaintext text-center" style="color: #ff5f13">@director.FullName</a>
+                }
+            </div>
+            <div class="col">
+                <label asp-for="Categories" class="form-control-plaintext font-weight-bold text-center" style="font-size:25px"></label>
+                @foreach (var categories in this.Model.Categories)
+                {
+                    <input asp-for="@categories.CategoryName" class="form-control-plaintext text-center" />
+                }
+            </div>
+
+        </div>
     </div>
     @if (this.User.Identity.IsAuthenticated)
     {
@@ -70,5 +75,17 @@
             <a asp-controller="Users" asp-action="AddToCollection" asp-route-id="@this.Model.Id" class="btn text-center">Add To Watchlist</a>
         </div>
     }
+    @if (this.User.Identity.IsAuthenticated)
+    {
+        <br />
+        <div class="text-center">
+            <a asp-controller="Users" asp-action="AddComment" asp-route-id="@this.Model.Id" class="btn text-center">Add Comment</a>
+        </div>
+    }
+
+    <br />
+    <div class="text-center">
+        <a asp-controller="Users" asp-action="DisplayAllCommentsForMovie" asp-route-id="@this.Model.Id" class="btn text-center">Comments</a>
+    </div>
 </div>
 
