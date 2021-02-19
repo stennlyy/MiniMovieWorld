@@ -17,6 +17,7 @@
     using Microsoft.Extensions.Logging;
     using MiniMovieWorld.Data;
     using MiniMovieWorld.Data.Models;
+    using MiniMovieWorld.Services.Data.EmailSender;
 
     [AllowAnonymous]
     public class RegisterModel : PageModel
@@ -24,14 +25,14 @@
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ILogger<RegisterModel> logger;
-        private readonly IEmailSender emailSender;
+        private readonly IEmailSenderService emailSender;
         private readonly RoleManager<ApplicationRole> roleManager;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender,
+            IEmailSenderService emailSender,
             RoleManager<ApplicationRole> roleManager)
         {
             this.userManager = userManager;
@@ -106,8 +107,8 @@
                         values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
                         protocol: this.Request.Scheme);
 
-                    await this.emailSender.SendEmailAsync(this.Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    await this.emailSender.SendEmailAsync(this.Input.Email, "Confirm your email for MiniMovieWorld",
+                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>. Enjoy my project web application.");
 
                     if (this.userManager.Options.SignIn.RequireConfirmedAccount)
                     {
@@ -115,8 +116,7 @@
                     }
                     else
                     {
-                        await this.signInManager.SignInAsync(user, isPersistent: false);
-                        return this.LocalRedirect(returnUrl);
+                        return this.Redirect("Test");
                     }
                 }
                 foreach (var error in result.Errors)

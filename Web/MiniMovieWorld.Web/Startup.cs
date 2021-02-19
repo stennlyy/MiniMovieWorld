@@ -23,6 +23,7 @@
     using MiniMovieWorld.Services.Data.Admin.DirectorsService;
     using MiniMovieWorld.Services.Data.Admin.MoviesService;
     using MiniMovieWorld.Services.Data.Admin.WritersService;
+    using MiniMovieWorld.Services.Data.EmailSender;
     using MiniMovieWorld.Services.Data.User;
     using MiniMovieWorld.Services.Data.User.ActorsService;
     using MiniMovieWorld.Services.Data.User.CommentsService;
@@ -90,6 +91,8 @@
             services.AddTransient<IRatesService, RatesService>();
             services.AddTransient<IViewComponentsService, ViewComponentsService>();
             services.AddTransient<ICommentsService, CommentsService>();
+
+            services.AddTransient<IEmailSenderService, EmailSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
