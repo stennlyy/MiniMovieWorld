@@ -21,7 +21,7 @@
         private readonly ILogger<LoginModel> logger;
 
         public LoginModel(
-            SignInManager<ApplicationUser> signInManager, 
+            SignInManager<ApplicationUser> signInManager,
             ILogger<LoginModel> logger,
             UserManager<ApplicationUser> userManager)
         {
@@ -79,26 +79,39 @@
             returnUrl ??= this.Url.Content("~/");
 
             this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-        
+
             if (this.ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await this.signInManager.PasswordSignInAsync(this.Input.Username, this.Input.Password, this.Input.RememberMe, lockoutOnFailure: false);
+
                 if (result.Succeeded)
                 {
                     this.logger.LogInformation("User logged in.");
                     return this.LocalRedirect(returnUrl);
                 }
+
                 if (result.RequiresTwoFactor)
                 {
                     return this.RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = this.Input.RememberMe });
                 }
+
                 if (result.IsLockedOut)
                 {
                     this.logger.LogWarning("User account locked out.");
                     return this.RedirectToPage("./Lockout");
                 }
+
+                var user = await this.userManager.FindByNameAsync(this.Input.Username);
+
+                if (user != null && !user.EmailConfirmed)
+                {
+                    this.logger.LogWarning("User email is noy confirmed");
+                    this.ModelState.AddModelError(string.Empty, "Email is not confirmed. Please check your email.");
+                    return this.Page();
+                }
+
                 else
                 {
                     this.ModelState.AddModelError(string.Empty, "Invalid login attempt.");
